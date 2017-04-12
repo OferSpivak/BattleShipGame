@@ -11,4 +11,10 @@ public interface BattleShip {
     void reduceCurrentSize();
 
     int getOriginalSize();
+
+    int getPositionX();
+
+    int getPosistionY();
+
+    Direction getDirection();
 }

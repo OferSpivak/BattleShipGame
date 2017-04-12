@@ -6,5 +6,6 @@ package engine;
 public enum HitBoardType {
         EMPTY,
         HIT,
-        MISS
+        MISS,
+        ALREADY_HIT
 }

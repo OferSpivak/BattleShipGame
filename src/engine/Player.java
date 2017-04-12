@@ -5,6 +5,14 @@ package engine;
  */
 public interface Player {
 
+    void addShip(BattleShip ship);
+
+    void markHit(int x, int y);
+
+    void markMiss(int x, int y);
+
+    HitBoardType tryToHitMyShip(int x, int y);
+
     String getName();
 
     int getScore();
@@ -14,4 +22,8 @@ public interface Player {
     int getMissCount();
 
     int getHitCount();
+
+    HitBoardType[][] getHitBoard();
+
+    BattleShip[][] getOwnBoard();
 }
