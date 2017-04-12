@@ -1,4 +1,8 @@
-package engine;
+package engine.player;
+
+import engine.battleShip.BattleShip;
+import engine.battleShip.Direction;
+import engine.HitBoardType;
 
 import java.util.ArrayList;
 
@@ -38,7 +42,7 @@ public class PlayerImpl implements Player {
 
     public void addShip(BattleShip ship) {
         int positionX = ship.getPositionX();
-        int positionY = ship.getPosistionY();
+        int positionY = ship.getPositionY();
         Direction direction = ship.getDirection();
 
         try {
