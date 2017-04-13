@@ -44,9 +44,8 @@ public class BaseGameEngine {
     }
 
     public void bombPoint(int x, int y) {
-        HitBoardType hit = null;
         try {
-            hit = opponentPlayer.tryToHitMyShip(x, y);
+            HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
             switch (hit) {
                 case HIT: {
                     currentPlayer.markHit(x, y);
@@ -63,15 +62,23 @@ public class BaseGameEngine {
         }
     }
 
-    public Tile[][]  getCurrentPlayerOwnBoard() {
+    public Tile[][] getCurrentPlayerOwnBoard() {
         return currentPlayer.getOwnBoard();
     }
 
-    public HitBoardType[][]  getCurrentPlayerHitBoard() {
+    public HitBoardType[][] getCurrentPlayerHitBoard() {
         return currentPlayer.getHitBoard();
     }
 
-    /*public Player getOpponentPlayer() {
-        return opponentPlayer;
-    }*/
+    public Tile[][] getOpponentPlayerOwnBoard() {
+        return opponentPlayer.getOwnBoard();
+    }
+
+    public HitBoardType[][] getOpponentPlayerHitBoard() {
+        return opponentPlayer.getHitBoard();
+    }
+
+    public String getCurrentUserName() {
+        return currentPlayer.getName();
+    }
 }

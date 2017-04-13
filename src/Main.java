@@ -9,17 +9,19 @@ public class Main {
     public static void main(String[] args) {
         //System.out.println("Hello World!");
 
-        Settings settings = new SettingsImpl("player1", "player2", 5);
+        Settings settings = new SettingsImpl("player1", "player2", 20);
         ConsoleUI consoleUI = new ConsoleUI();
         BaseGameEngine gameEngine = new BaseGameEngine(settings);
-        consoleUI.drawPlayerOwnBoard(gameEngine.getCurrentPlayerOwnBoard());
 
+
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
         gameEngine.bombPoint(0,0); //hit
-        consoleUI.drawPlayerOwnBoard(gameEngine.getCurrentPlayerOwnBoard());
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
         gameEngine.bombPoint(0, 1); //hit
-        consoleUI.drawPlayerOwnBoard(gameEngine.getCurrentPlayerOwnBoard());
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
         gameEngine.bombPoint(1, 0); //miss
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
         gameEngine.bombPoint(2,2); //hit
-
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
     }
 }
