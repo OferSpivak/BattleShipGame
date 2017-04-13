@@ -14,7 +14,7 @@ public interface Player {
 
     void markMiss(int x, int y);
 
-    HitBoardType tryToHitMyShip(int x, int y);
+    HitBoardType tryToHitMyShip(int x, int y) throws Exception;
 
     String getName();
 
@@ -28,5 +28,5 @@ public interface Player {
 
     HitBoardType[][] getHitBoard();
 
-    BattleShip[][] getOwnBoard();
+    Tile[][] getOwnBoard();
 }

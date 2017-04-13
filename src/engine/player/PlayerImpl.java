@@ -1,5 +1,6 @@
 package engine.player;
 
+import engine.TileState;
 import engine.battleShip.BattleShip;
 import engine.battleShip.Direction;
 import engine.HitBoardType;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public class PlayerImpl implements Player {
     private HitBoardType hitBoard[][];
-    private BattleShip ownBoard[][];
+    private Tile ownBoard[][];
     private ArrayList<BattleShip> ships = new ArrayList<>();
     private String name;
     private int score = 0;
@@ -20,7 +21,7 @@ public class PlayerImpl implements Player {
 
     private void initBoards(int boardsSize) {
         hitBoard = new HitBoardType[boardsSize][boardsSize];
-        ownBoard = new BattleShip[boardsSize][boardsSize];
+        ownBoard = new Tile[boardsSize][boardsSize];
 
         for (int i = 0; i < boardsSize; i++) {
             for (int j = 0; j < boardsSize; j++) {
@@ -30,7 +31,7 @@ public class PlayerImpl implements Player {
 
         for (int i = 0; i < boardsSize; i++) {
             for (int j = 0; j < boardsSize; j++) {
-                ownBoard[i][j] = null;
+                ownBoard[i][j] = new TileImpl();
             }
         }
     }
@@ -48,11 +49,11 @@ public class PlayerImpl implements Player {
         try {
             if (direction == Direction.ROW) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
-                    ownBoard[positionX][positionY + i] = ship;
+                    ownBoard[positionX][positionY + i] = new TileImpl(ship);
                 }
             } else if (direction == Direction.COLUMN) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
-                    ownBoard[positionX + i][positionY] = ship;
+                    ownBoard[positionX + i][positionY] = new TileImpl(ship);
                 }
             }
             ships.add(ship);
@@ -80,17 +81,21 @@ public class PlayerImpl implements Player {
         }
     }
 
-    public HitBoardType tryToHitMyShip(int x, int y) {
+    public HitBoardType tryToHitMyShip(int x, int y) throws Exception {
         try {
-            BattleShip tile = ownBoard[x][y];
-            if (tile == null) {
-                return HitBoardType.MISS;
-            }
-            if (tile.getCurrentSize() == 0) {
-                return HitBoardType.ALREADY_HIT; // meaning the current tile already been hit
-            } else {
-                tile.reduceCurrentSize();
-                return HitBoardType.HIT;
+            Tile tile = ownBoard[x][y];
+            switch (tile.getState()) {
+                case FULL: {
+                    tile.getBattleShip().reduceCurrentSize();
+                    tile.markBombed();
+                    return HitBoardType.HIT;
+                }
+                case EMPTY: {
+                    return HitBoardType.MISS;
+                }
+                case BOMBED: {
+                    throw new Exception("already bombed");
+                }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             //todo something
@@ -122,7 +127,7 @@ public class PlayerImpl implements Player {
         return hitBoard.clone();
     }
 
-    public BattleShip[][] getOwnBoard() {
+    public Tile[][] getOwnBoard() {
         return ownBoard.clone();
     }
 }

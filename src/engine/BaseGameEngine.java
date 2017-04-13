@@ -42,20 +42,22 @@ public class BaseGameEngine {
     }
 
     public void bombPoint(int x, int y) {
-        HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
-        switch (hit) {
-            case HIT: {
-                currentPlayer.markHit(x, y);
-                break;
+        HitBoardType hit = null;
+        try {
+            hit = opponentPlayer.tryToHitMyShip(x, y);
+            switch (hit) {
+                case HIT: {
+                    currentPlayer.markHit(x, y);
+                    break;
+                }
+                case MISS: {
+                    currentPlayer.markMiss(x, y);
+                    switchPlayers();
+                    break;
+                }
             }
-            case MISS: {
-                currentPlayer.markMiss(x, y);
-                switchPlayers();
-                break;
-            }
-            case ALREADY_HIT: {
-                break;
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
