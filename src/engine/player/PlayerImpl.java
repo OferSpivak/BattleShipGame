@@ -92,7 +92,8 @@ public class PlayerImpl implements Player {
                 case EMPTY: {
                     return HitBoardType.MISS;
                 }
-                case BOMBED: {
+                case EMPTY_BOMBED:
+                case SHIP_BOMBED: {
                     throw new Exception("already bombed");
                 }
             }

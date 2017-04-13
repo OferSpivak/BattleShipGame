@@ -6,5 +6,6 @@ package engine.enums;
 public enum TileState {
     EMPTY,
     FULL,
-    BOMBED
+    EMPTY_BOMBED,
+    SHIP_BOMBED
 }

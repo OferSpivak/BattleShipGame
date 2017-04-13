@@ -6,6 +6,7 @@ import engine.enums.Direction;
 import engine.enums.HitBoardType;
 import engine.player.Player;
 import engine.player.PlayerImpl;
+import engine.player.Tile;
 import engine.settings.Settings;
 
 /**
@@ -62,11 +63,15 @@ public class BaseGameEngine {
         }
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
+    public Tile[][]  getCurrentPlayerOwnBoard() {
+        return currentPlayer.getOwnBoard();
     }
 
-    public Player getOpponentPlayer() {
-        return opponentPlayer;
+    public HitBoardType[][]  getCurrentPlayerHitBoard() {
+        return currentPlayer.getHitBoard();
     }
+
+    /*public Player getOpponentPlayer() {
+        return opponentPlayer;
+    }*/
 }

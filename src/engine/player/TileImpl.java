@@ -29,6 +29,10 @@ public class TileImpl implements Tile {
     }
 
     public void markBombed() {
-        this.state = TileState.BOMBED;
+        if (state == TileState.FULL){
+            state = TileState.SHIP_BOMBED;
+        } else {
+            state = TileState.EMPTY_BOMBED;
+        }
     }
 }
