@@ -1,9 +1,8 @@
 package engine.player;
 
-import engine.TileState;
 import engine.battleShip.BattleShip;
-import engine.battleShip.Direction;
-import engine.HitBoardType;
+import engine.enums.Direction;
+import engine.enums.HitBoardType;
 
 import java.util.ArrayList;
 

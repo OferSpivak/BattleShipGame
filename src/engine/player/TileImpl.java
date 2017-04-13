@@ -1,7 +1,7 @@
 package engine.player;
 
-import engine.TileState;
 import engine.battleShip.BattleShip;
+import engine.enums.TileState;
 
 /**
  * Created by OFer.Spivak on 13/04/2017.

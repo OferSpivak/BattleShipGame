@@ -1,7 +1,7 @@
 package engine.player;
 
 import engine.battleShip.BattleShip;
-import engine.HitBoardType;
+import engine.enums.HitBoardType;
 
 /**
  * Created by OFer.Spivak on 12/04/2017.

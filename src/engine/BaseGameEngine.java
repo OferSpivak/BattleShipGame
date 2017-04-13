@@ -2,7 +2,8 @@ package engine;
 
 import engine.battleShip.BattleShip;
 import engine.battleShip.BattleShipImpl;
-import engine.battleShip.Direction;
+import engine.enums.Direction;
+import engine.enums.HitBoardType;
 import engine.player.Player;
 import engine.player.PlayerImpl;
 import engine.settings.Settings;
