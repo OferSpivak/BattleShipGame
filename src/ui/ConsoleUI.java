@@ -93,22 +93,7 @@ public class ConsoleUI {
             Tile[] row = board[i];
             for (Tile tile : row) {
                 TileState tileState = tile.getState();
-                switch (tileState) {
-                    case EMPTY: {
-                        System.out.print("|   ");
-                        break;
-                    }
-                    case FULL: {
-                        System.out.print("| O ");
-                        break;
-                    }
-                    case EMPTY_BOMBED: {
-                        System.out.print("| . ");
-                    }
-                    case SHIP_BOMBED: {
-                        System.out.print("| X ");
-                    }
-                }
+                System.out.print(tileState.toString());
             }
             System.out.print("|");
         }
@@ -127,19 +112,7 @@ public class ConsoleUI {
             System.out.print(" " + (i + 1));
             HitBoardType[] row = board[i];
             for (HitBoardType tile : row) {
-                switch (tile) {
-                    case EMPTY: {
-                        System.out.print("|   ");
-                        break;
-                    }
-                    case MISS: {
-                        System.out.print("| . ");
-                        break;
-                    }
-                    case HIT: {
-                        System.out.print("| X ");
-                    }
-                }
+                System.out.print(tile.toString());
             }
             System.out.print("|");
         }
