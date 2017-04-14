@@ -83,7 +83,6 @@ public class ConsoleUI {
 
     private void drawOwnBoard(Tile[][] board) {
         drawBoardHeader(board.length);
-
         for (int i = 0; i < board.length; i++) {
             System.out.println();
             if (board.length > 9 && i < 9) {
@@ -102,8 +101,6 @@ public class ConsoleUI {
 
     private void drawHitBoard(HitBoardType[][] board) {
         drawBoardHeader(board.length);
-
-
         for (int i = 0; i < board.length; i++) {
             System.out.println();
             if (board.length > 9 && i < 9) {
