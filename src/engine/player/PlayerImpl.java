@@ -90,11 +90,12 @@ public class PlayerImpl implements Player {
                     return HitBoardType.HIT;
                 }
                 case EMPTY: {
+                    tile.markBombed();
                     return HitBoardType.MISS;
                 }
                 case EMPTY_BOMBED:
                 case SHIP_BOMBED: {
-                    throw new Exception("already bombed");
+                    throw new Exception("already bombed"); //todo create a dedicated exception and let the ui figure what to do with it.
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
