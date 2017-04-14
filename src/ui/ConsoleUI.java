@@ -5,6 +5,7 @@ import engine.enums.HitBoardType;
 import engine.enums.TileState;
 import engine.player.Tile;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -13,26 +14,98 @@ import java.util.Scanner;
 public class ConsoleUI {
     private EngineUIInterface gameEngine;
     private Scanner scanner;
+    private boolean shouldRunGame;
 
     public ConsoleUI(EngineUIInterface gameEngine) {
         this.gameEngine = gameEngine;
         scanner = new Scanner(System.in);
+        shouldRunGame = true;
     }
 
     public void startGAme() {
-        int i =0;
-        while (i<20) {
+        while (shouldRunGame) {
             printCurrentPlayerState();
-            bombTarget();
-            i++;
+            getMenuSelection();
         }
+        printEndGame();
+    }
+
+    private void printCurrentPlayerState() {
+        System.out.println("Its " + gameEngine.getCurrentPlayerName() + " turn");
+        System.out.println();
+        drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard());
+    }
+
+    private void getMenuSelection() {
+        boolean validInput = false;
+        do {
+            try {
+                System.out.println("Menu:");
+                System.out.println("1: Bomb Target");
+                System.out.println("2: Game Statistics");
+                System.out.println("3: Quit Game");
+                System.out.println("Enter your selection");
+                int input = scanner.nextInt();
+                switch (input){
+                    case 1:{
+                        validInput = true;
+                        scanner.nextLine();
+                        bombTarget();
+                        break;
+                    }
+                    case 2:{
+                        printGameStatistics();
+                        break;
+                    }
+                    case 3: {
+                        shouldRunGame = false;
+                        validInput = true;
+                        break;
+                    }
+                    default: {
+                        validInput = false;
+                    }
+                }
+            }catch (InputMismatchException e){
+                validInput = false;
+                scanner.nextLine();
+            }catch (Exception e) {
+                //todo add
+            }
+        }while(!validInput);
+        //todo - add menu options
+    }
+
+    private void printEndGame() {
+        System.out.println("Thank you for playing");
+        int currentPlayerScore = gameEngine.getCurrentPlayerScore();
+        int opponentPlayerScore = gameEngine.getOpponentPlayerScore();
+        if (currentPlayerScore > opponentPlayerScore) {
+            System.out.println(gameEngine.getCurrentPlayerName() + " Won!");
+        } else if(currentPlayerScore < opponentPlayerScore) {
+            System.out.println(gameEngine.getOpponentPlayerName() + " Won!");
+        } else {
+            System.out.println("We have a Draw");
+        }
+
+    }
+
+    private void printGameStatistics() {
+        int currentPlayerHitCount = gameEngine.getCurrentPlayerHitCount();
+        int currentPlayerMissCount = gameEngine.getCurrentPlayerMissCount();
+        int opponentPlayerHitCount = gameEngine.getOpponentPlayerHitCount();
+        int opponentPlayerMissCount = gameEngine.getOpponentPlayerMissCount();
+
+        System.out.println("Statistics:");
+        System.out.println(gameEngine.getCurrentPlayerName() + " Hits: " + currentPlayerHitCount + ", Misses: "+ currentPlayerMissCount);
+        System.out.println(gameEngine.getOpponentPlayerName() + " Hits: " + opponentPlayerHitCount+ ", Misses: "+ opponentPlayerMissCount);
     }
 
     private void bombTarget() {
         boolean validInput = false;
         do {
             try {
-                System.out.println("Please select your target (in x,y format)");
+                System.out.println("Select your target (in x,y format)");
                 String input = scanner.nextLine();
                 String[] values = input.split(",");
                 if (values.length == 2) {
@@ -60,16 +133,6 @@ public class ConsoleUI {
                 //todo - deal with exceptions
             }
         } while (!validInput);
-    }
-
-    private void getMenuSelection() {
-        //todo - add menu options
-    }
-
-    private void printCurrentPlayerState() {
-        System.out.println("Its " + gameEngine.getCurrentUserName() + " turn");
-        System.out.println();
-        drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard());
     }
 
     private void drawBoards(Tile[][] ownBoard, HitBoardType[][] hitBoard) {

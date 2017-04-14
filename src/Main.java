@@ -14,18 +14,18 @@ public class Main {
         ConsoleUI consoleUI = new ConsoleUI(gameEngine);
         consoleUI.startGAme();
 
-        /*consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
+        /*consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentPlayerName());
 
         gameEngine.bombPoint(0,0); //hit
-        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentPlayerName());
 
         gameEngine.bombPoint(0, 1); //hit
-        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentPlayerName());
 
         gameEngine.bombPoint(1, 0); //miss
-        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentPlayerName());
 
         gameEngine.bombPoint(2,2); //hit
-        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentUserName());*/
+        consoleUI.drawBoards(gameEngine.getCurrentPlayerOwnBoard(), gameEngine.getCurrentPlayerHitBoard(), gameEngine.getCurrentPlayerName());*/
     }
 }

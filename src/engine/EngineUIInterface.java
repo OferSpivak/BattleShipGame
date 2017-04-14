@@ -14,6 +14,20 @@ public interface EngineUIInterface {
 
      HitBoardType[][] getCurrentPlayerHitBoard();
 
-     String getCurrentUserName();
+     String getCurrentPlayerName();
+
+     String getOpponentPlayerName();
+
+     int getCurrentPlayerScore();
+
+     int getOpponentPlayerScore();
+
+     int getCurrentPlayerHitCount();
+
+     int getCurrentPlayerMissCount();
+
+     int getOpponentPlayerHitCount();
+
+     int getOpponentPlayerMissCount();
 
 }

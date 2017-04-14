@@ -80,7 +80,35 @@ public class BaseGameEngine implements EngineUIInterface {
         return opponentPlayer.getHitBoard();
     }
 
-    public String getCurrentUserName() {
+    public String getCurrentPlayerName() {
         return currentPlayer.getName();
+    }
+    
+    public String getOpponentPlayerName() {
+        return opponentPlayer.getName();
+    }
+    
+    public int getCurrentPlayerScore() {
+        return currentPlayer.getScore();
+    }
+    
+    public int getOpponentPlayerScore() {
+        return opponentPlayer.getScore();
+    }
+
+    public int getCurrentPlayerHitCount() {
+        return currentPlayer.getHitCount();
+    }
+
+    public int getCurrentPlayerMissCount() {
+        return currentPlayer.getMissCount();
+    }
+
+    public int getOpponentPlayerHitCount() {
+        return opponentPlayer.getHitCount();
+    }
+
+    public int getOpponentPlayerMissCount() {
+        return opponentPlayer.getMissCount();
     }
 }
