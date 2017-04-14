@@ -6,6 +6,5 @@ package engine.enums;
 public enum HitBoardType {
         EMPTY,
         HIT,
-        MISS,
-        ALREADY_HIT
+        MISS
 }

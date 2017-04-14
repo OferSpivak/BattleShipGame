@@ -12,7 +12,7 @@ import engine.settings.Settings;
 /**
  * Created by Ofer.Spivak on 12/04/2017.
  */
-public class BaseGameEngine {
+public class BaseGameEngine implements EngineUIInterface {
     Player currentPlayer;
     Player opponentPlayer;
 
@@ -43,7 +43,7 @@ public class BaseGameEngine {
         opponentPlayer = tmp;
     }
 
-    public void bombPoint(int x, int y) {
+    public HitBoardType bombPoint(int x, int y) {
         try {
             HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
             switch (hit) {
@@ -57,9 +57,11 @@ public class BaseGameEngine {
                     break;
                 }
             }
+            return hit;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public Tile[][] getCurrentPlayerOwnBoard() {
