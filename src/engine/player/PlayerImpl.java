@@ -5,6 +5,7 @@ import engine.enums.Direction;
 import engine.enums.HitBoardType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by OFer.Spivak on 12/04/2017.
@@ -58,6 +59,12 @@ public class PlayerImpl implements Player {
             ships.add(ship);
         } catch (ArrayIndexOutOfBoundsException e) {
             //todo something.
+        }
+    }
+
+    public void addShips(List<BattleShip> battleShipList) {
+        for (BattleShip battleShip: battleShipList){
+            addShip(battleShip);
         }
     }
 

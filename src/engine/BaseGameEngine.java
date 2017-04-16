@@ -1,8 +1,5 @@
 package engine;
 
-import engine.battleShip.BattleShip;
-import engine.battleShip.BattleShipImpl;
-import engine.enums.Direction;
 import engine.enums.HitBoardType;
 import engine.player.Player;
 import engine.player.PlayerImpl;
@@ -26,15 +23,8 @@ public class BaseGameEngine implements EngineUIInterface {
         opponentPlayer = new PlayerImpl(settings.getPlayer2Name(), settings.getBoardSize());
 
         //adding ships - todo: extract to method with validation etc...
-        BattleShip ship = new BattleShipImpl(4, Direction.ROW, 0, 0);
-        opponentPlayer.addShip(ship);
-        ship = new BattleShipImpl(2, Direction.COLUMN, 3, 1);
-        opponentPlayer.addShip(ship);
-
-        ship = new BattleShipImpl(2, Direction.COLUMN, 3, 1);
-        currentPlayer.addShip(ship);
-        ship = new BattleShipImpl(4, Direction.ROW, 2, 2);
-        currentPlayer.addShip(ship);
+        currentPlayer.addShips(settings.getPlayer1Ships());
+        opponentPlayer.addShips(settings.getPlayer2Ships());
     }
 
     private void switchPlayers() {
