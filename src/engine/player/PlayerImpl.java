@@ -59,6 +59,9 @@ public class PlayerImpl implements Player {
                 }
             } else if (direction == Direction.COLUMN) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
+                    if (ownBoard[positionX + i][positionY].getState() != TileState.EMPTY){
+                        throw new AddingShipToNoneEmptyBoardTile(ship, positionX+i, positionY);
+                    }
                     ownBoard[positionX + i][positionY] = new TileImpl(ship);
                 }
             }
