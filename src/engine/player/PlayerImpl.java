@@ -3,6 +3,7 @@ package engine.player;
 import engine.battleShip.BattleShip;
 import engine.enums.Direction;
 import engine.enums.HitBoardType;
+import exceptions.AddingShipOutOfBoardBounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class PlayerImpl implements Player {
         initBoards(boardSize);
     }
 
-    public void addShip(BattleShip ship) {
+    public void addShip(BattleShip ship) throws AddingShipOutOfBoardBounds {
         int positionX = ship.getPositionX();
         int positionY = ship.getPositionY();
         Direction direction = ship.getDirection();
@@ -58,11 +59,11 @@ public class PlayerImpl implements Player {
             }
             ships.add(ship);
         } catch (ArrayIndexOutOfBoundsException e) {
-            //todo something.
+            throw new AddingShipOutOfBoardBounds(ship);
         }
     }
 
-    public void addShips(List<BattleShip> battleShipList) {
+    public void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBounds {
         for (BattleShip battleShip: battleShipList){
             addShip(battleShip);
         }

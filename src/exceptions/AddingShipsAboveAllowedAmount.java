@@ -8,6 +8,6 @@ import engine.settings.ShipType;
  */
 public class AddingShipsAboveAllowedAmount extends InitializationFail {
     public AddingShipsAboveAllowedAmount(Ship ship) {
-        super("Adding ship (" + ship.toString() + ") above the allowed amount to its type.");
+        super("Adding ship {" + ship.toString() + "} above the allowed amount to its type.");
     }
 }

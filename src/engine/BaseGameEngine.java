@@ -5,6 +5,7 @@ import engine.player.Player;
 import engine.player.PlayerImpl;
 import engine.player.Tile;
 import engine.settings.Settings;
+import exceptions.InitializationFail;
 
 /**
  * Created by Ofer.Spivak on 12/04/2017.
@@ -13,11 +14,11 @@ public class BaseGameEngine implements EngineUIInterface {
     Player currentPlayer;
     Player opponentPlayer;
 
-    public BaseGameEngine(Settings settings) {
+    public BaseGameEngine(Settings settings) throws InitializationFail{
         initGame(settings);
     }
 
-    private void initGame(Settings settings) {
+    private void initGame(Settings settings) throws InitializationFail{
         // create players
         currentPlayer = new PlayerImpl(settings.getPlayer1Name(), settings.getBoardSize());
         opponentPlayer = new PlayerImpl(settings.getPlayer2Name(), settings.getBoardSize());

@@ -7,6 +7,6 @@ import engine.settings.ShipType;
  */
 public class ShipTypeAlreadyDecalred extends InitializationFail {
     public ShipTypeAlreadyDecalred(ShipType shipType) {
-        super("Ship-type: " + shipType.getType() + "already declared");
+        super("Ship-type: " + shipType.getType() + " already declared");
     }
 }

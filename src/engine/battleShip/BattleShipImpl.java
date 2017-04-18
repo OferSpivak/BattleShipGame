@@ -9,15 +9,15 @@ public class BattleShipImpl implements BattleShip{
     private int currentSize;
     private int originalSize;
     private int positionX;
-    private int posistionY;
+    private int positionY;
     private Direction direction;
     //int score; //todo - to figure out if i gonna used it at the next HW
 
-    public BattleShipImpl(int size, Direction direction, int positionX, int posistionY) {
+    public BattleShipImpl(int size, Direction direction, int positionX, int positionY) {
         originalSize = currentSize = size;
         this.direction = direction;
         this.positionX = positionX;
-        this.posistionY = posistionY;
+        this.positionY = positionY;
     }
 
     public int getCurrentSize() {
@@ -41,10 +41,15 @@ public class BattleShipImpl implements BattleShip{
     }
 
     public int getPositionY() {
-        return posistionY;
+        return positionY;
     }
 
     public Direction getDirection() {
         return direction;
+    }
+
+    @Override
+    public String toString() {
+        return "Position: " + getPositionX() + ", " + getPositionY() + ". Direction: " + getDirection() + ". Size: " + getOriginalSize();
     }
 }

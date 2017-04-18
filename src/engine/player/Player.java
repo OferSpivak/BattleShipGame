@@ -2,6 +2,7 @@ package engine.player;
 
 import engine.battleShip.BattleShip;
 import engine.enums.HitBoardType;
+import exceptions.AddingShipOutOfBoardBounds;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ import java.util.List;
  */
 public interface Player {
 
-    void addShip(BattleShip ship);
+    void addShip(BattleShip ship) throws AddingShipOutOfBoardBounds;
 
-    void addShips(List<BattleShip> battleShipList);
+    void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBounds;
 
     void markHit(int x, int y);
 
