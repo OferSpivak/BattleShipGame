@@ -3,7 +3,9 @@ package engine.player;
 import engine.battleShip.BattleShip;
 import engine.enums.Direction;
 import engine.enums.HitBoardType;
+import engine.enums.TileState;
 import exceptions.AddingShipOutOfBoardBounds;
+import exceptions.AddingShipToNoneEmptyBoardTile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class PlayerImpl implements Player {
         initBoards(boardSize);
     }
 
-    public void addShip(BattleShip ship) throws AddingShipOutOfBoardBounds {
+    public void addShip(BattleShip ship) throws AddingShipOutOfBoardBounds, AddingShipToNoneEmptyBoardTile {
         int positionX = ship.getPositionX();
         int positionY = ship.getPositionY();
         Direction direction = ship.getDirection();
@@ -50,6 +52,9 @@ public class PlayerImpl implements Player {
         try {
             if (direction == Direction.ROW) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
+                    if (ownBoard[positionX][positionY + i].getState() != TileState.EMPTY){
+                        throw new AddingShipToNoneEmptyBoardTile(ship, positionX, positionY+i);
+                    }
                     ownBoard[positionX][positionY + i] = new TileImpl(ship);
                 }
             } else if (direction == Direction.COLUMN) {
@@ -63,7 +68,7 @@ public class PlayerImpl implements Player {
         }
     }
 
-    public void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBounds {
+    public void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBounds, AddingShipToNoneEmptyBoardTile {
         for (BattleShip battleShip: battleShipList){
             addShip(battleShip);
         }
