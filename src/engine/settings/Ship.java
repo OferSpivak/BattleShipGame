@@ -7,7 +7,7 @@ import engine.enums.Direction;
  */
 public interface Ship {
     Direction getDirection();
-    int getPoisitionX();
+    int getPositionX();
     int getPositionY();
     ShipType getShipType();
 }

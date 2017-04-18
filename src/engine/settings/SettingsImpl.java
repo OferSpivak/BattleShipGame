@@ -3,6 +3,10 @@ package engine.settings;
 import engine.battleShip.BattleShip;
 import engine.battleShip.BattleShipImpl;
 import engine.enums.Direction;
+import exceptions.AddingShipsAboveAllowedAmount;
+import exceptions.InitializationFail;
+import exceptions.NotAllShipTypeAddedToBoard;
+import exceptions.ShipTypeAlreadyDecalred;
 
 import java.util.*;
 
@@ -20,7 +24,7 @@ public class SettingsImpl implements Settings {
 
     //todo ship types, boards size etc... should come from the DAL
     // constructor should get list of shipTypes, list of player1 ships, player2 ships
-    public SettingsImpl() throws Exception {
+    public SettingsImpl() throws InitializationFail {
         // adding ship types
         ShipType shipTypeA = new ShipType() {
             @Override
@@ -67,7 +71,7 @@ public class SettingsImpl implements Settings {
             }
 
             @Override
-            public int getPoisitionX() {
+            public int getPositionX() {
                 return 1;
             }
 
@@ -80,6 +84,11 @@ public class SettingsImpl implements Settings {
             public ShipType getShipType() {
                 return shipTypeA;
             }
+
+            @Override
+            public String toString() {
+                return "Position: " + getPositionX() + ", " + getPositionY() + ". Direction: " + getDirection() + ". Size: " + getShipType().getShipSize();
+            }
         };
         Ship ship2 = new Ship() {
             @Override
@@ -88,7 +97,7 @@ public class SettingsImpl implements Settings {
             }
 
             @Override
-            public int getPoisitionX() {
+            public int getPositionX() {
                 return 3;
             }
 
@@ -101,6 +110,11 @@ public class SettingsImpl implements Settings {
             public ShipType getShipType() {
                 return shipTypeB;
             }
+
+            @Override
+            public String toString() {
+                return "Position: " + getPositionX() + ", " + getPositionY() + ". Direction: " + getDirection() + ". Size: " + getShipType().getShipSize();
+            }
         };
         List<Ship> player1ShipList = Arrays.asList(ship1, ship2);
 
@@ -111,7 +125,7 @@ public class SettingsImpl implements Settings {
             }
 
             @Override
-            public int getPoisitionX() {
+            public int getPositionX() {
                 return 1;
             }
 
@@ -132,7 +146,7 @@ public class SettingsImpl implements Settings {
             }
 
             @Override
-            public int getPoisitionX() {
+            public int getPositionX() {
                 return 1;
             }
 
@@ -152,16 +166,16 @@ public class SettingsImpl implements Settings {
         player2Ships = addPlayerShips(player2ShipList);
     }
 
-    private void setShipTypes(List<ShipType> shipTypeList) throws Exception {
+    private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDecalred {
         for (ShipType shipType : shipTypeList) {
             if (stringShipTypeMap.get(shipType.getType()) != null) {
-                throw new Exception("Type already declared");
+                throw new ShipTypeAlreadyDecalred(shipType);
             }
             stringShipTypeMap.put(shipType.getType(), shipType);
         }
     }
 
-    private List<BattleShip> addPlayerShips(List<Ship> playerShipList) {
+    private List<BattleShip> addPlayerShips(List<Ship> playerShipList) throws AddingShipsAboveAllowedAmount, NotAllShipTypeAddedToBoard {
         List<BattleShip> playerBattleShips = new ArrayList<>();
         // initializing the shipTypeCount for Player
         Map<String, Integer> shipTypeCount = new HashMap<>();
@@ -173,19 +187,26 @@ public class SettingsImpl implements Settings {
             ShipType shipType = ship.getShipType();
             int currentCount = shipTypeCount.get(shipType.getType());
             if (currentCount == 0) {
-                // throw exception initialization failed due to trying to add ship above the allowed amount.
-                return null;
+               throw new AddingShipsAboveAllowedAmount(ship);
             }
             shipTypeCount.remove(shipType.getType());
             shipTypeCount.put(shipType.getType(), currentCount - 1);
             BattleShip battleShip = new BattleShipImpl(
                     shipType.getShipSize(),
                     ship.getDirection(),
-                    convertPositionToArrayIndex(ship.getPoisitionX()),
+                    convertPositionToArrayIndex(ship.getPositionX()),
                     convertPositionToArrayIndex(ship.getPositionY())
             );
             playerBattleShips.add(battleShip);
         }
+        //validating All required ships had been added
+        for (String key : stringShipTypeMap.keySet()) {
+            int count = shipTypeCount.get(key);
+            if (count != 0) {
+                throw new NotAllShipTypeAddedToBoard(key);
+            }
+        }
+
         return playerBattleShips;
     }
 

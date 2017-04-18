@@ -25,5 +25,4 @@ public interface Settings {
 
     List<BattleShip> getPlayer2Ships();
 
-    //todo ships types
 }

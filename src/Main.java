@@ -1,6 +1,7 @@
 import engine.BaseGameEngine;
 import engine.settings.Settings;
 import engine.settings.SettingsImpl;
+import exceptions.InitializationFail;
 import ui.ConsoleUI;
 
 
@@ -12,6 +13,9 @@ public class Main {
             BaseGameEngine gameEngine = new BaseGameEngine(settings);
             ConsoleUI consoleUI = new ConsoleUI(gameEngine);
             consoleUI.startGAme();
+        } catch (InitializationFail initializationFailException){
+            System.out.println("***** Fail to initialize the Game *****");
+            System.out.println(initializationFailException.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
