@@ -2,6 +2,7 @@ package engine;
 
 import engine.enums.HitBoardType;
 import engine.player.Tile;
+import exceptions.HittingTargetOutsideTheBoardException;
 import exceptions.TileAlreadyBombedException;
 
 /**
@@ -9,7 +10,7 @@ import exceptions.TileAlreadyBombedException;
  */
 public interface EngineUIInterface {
 
-     HitBoardType bombPoint(int x, int y) throws TileAlreadyBombedException;
+     HitBoardType bombPoint(int x, int y) throws TileAlreadyBombedException, HittingTargetOutsideTheBoardException;
 
      Tile[][] getCurrentPlayerOwnBoard();
 

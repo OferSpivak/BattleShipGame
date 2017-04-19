@@ -7,6 +7,6 @@ import engine.battleShip.BattleShip;
  */
 public class AddingShipToNoneEmptyBoardTileException extends InitializationFailException {
     public AddingShipToNoneEmptyBoardTileException(BattleShip ship, int positionX, int positionY) {
-        super("Adding ship (" + ship.toString() + ") to none empty board tile: " + positionX + ", " + positionY);
+        super("Adding ship (" + ship.toString() + ") to none empty board tile: " + (positionX + 1) + ", " + (positionY + 1));
     }
 }

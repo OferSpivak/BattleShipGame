@@ -50,6 +50,6 @@ public class BattleShipImpl implements BattleShip{
 
     @Override
     public String toString() {
-        return "Position: " + getPositionX() + ", " + getPositionY() + ". Direction: " + getDirection() + ". Size: " + getOriginalSize();
+        return "Position: " + (getPositionX() + 1) + ", " + (getPositionY() + 1) + ". Direction: " + getDirection() + ". Size: " + getOriginalSize();
     }
 }

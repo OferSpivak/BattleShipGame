@@ -5,6 +5,7 @@ import engine.player.Player;
 import engine.player.PlayerImpl;
 import engine.player.Tile;
 import engine.settings.Settings;
+import exceptions.HittingTargetOutsideTheBoardException;
 import exceptions.InitializationFailException;
 import exceptions.TileAlreadyBombedException;
 
@@ -24,7 +25,7 @@ public class BaseGameEngine implements EngineUIInterface {
         currentPlayer = new PlayerImpl(settings.getPlayer1Name(), settings.getBoardSize());
         opponentPlayer = new PlayerImpl(settings.getPlayer2Name(), settings.getBoardSize());
 
-        //adding ships - todo: extract to method with validation etc...
+        //adding ships
         currentPlayer.addShips(settings.getPlayer1Ships());
         opponentPlayer.addShips(settings.getPlayer2Ships());
     }
@@ -35,7 +36,7 @@ public class BaseGameEngine implements EngineUIInterface {
         opponentPlayer = tmp;
     }
 
-    public HitBoardType bombPoint(int x, int y) throws TileAlreadyBombedException {
+    public HitBoardType bombPoint(int x, int y) throws TileAlreadyBombedException, HittingTargetOutsideTheBoardException {
         HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
         switch (hit) {
             case HIT: {

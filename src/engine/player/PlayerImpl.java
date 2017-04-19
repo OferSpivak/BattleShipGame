@@ -4,10 +4,7 @@ import engine.battleShip.BattleShip;
 import engine.enums.Direction;
 import engine.enums.HitBoardType;
 import engine.enums.TileState;
-import exceptions.AddingShipAdjacentToAnotherException;
-import exceptions.AddingShipOutOfBoardBoundsException;
-import exceptions.AddingShipToNoneEmptyBoardTileException;
-import exceptions.TileAlreadyBombedException;
+import exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,26 +116,26 @@ public class PlayerImpl implements Player {
         }
     }
 
-    public void markHit(int x, int y) { //user successfully hit the opponent ship
+    public void markHit(int x, int y) throws HittingTargetOutsideTheBoardException { //user successfully hit the opponent ship
         try {
             hitBoard[x][y] = HitBoardType.HIT;
             hitCount++;
             score++; //todo check how to calc score;
         } catch (ArrayIndexOutOfBoundsException e) {
-            //todo something
+            throw new HittingTargetOutsideTheBoardException(x, y);
         }
     }
 
-    public void markMiss(int x, int y) { //user missed the opponent ship
+    public void markMiss(int x, int y) throws HittingTargetOutsideTheBoardException { //user missed the opponent ship
         try {
             hitBoard[x][y] = HitBoardType.MISS;
             missCount++;
         } catch (ArrayIndexOutOfBoundsException e) {
-            //todo something
+            throw new HittingTargetOutsideTheBoardException(x, y);
         }
     }
 
-    public HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombedException {
+    public HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombedException, HittingTargetOutsideTheBoardException {
         try {
             Tile tile = ownBoard[x][y];
             switch (tile.getState()) {
@@ -157,7 +154,7 @@ public class PlayerImpl implements Player {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            //todo something
+            throw new HittingTargetOutsideTheBoardException(x, y);
         }
         return null;
     }

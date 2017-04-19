@@ -2,10 +2,7 @@ package engine.player;
 
 import engine.battleShip.BattleShip;
 import engine.enums.HitBoardType;
-import exceptions.AddingShipAdjacentToAnotherException;
-import exceptions.AddingShipOutOfBoardBoundsException;
-import exceptions.AddingShipToNoneEmptyBoardTileException;
-import exceptions.TileAlreadyBombedException;
+import exceptions.*;
 
 import java.util.List;
 
@@ -18,11 +15,11 @@ public interface Player {
 
     void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException, AddingShipAdjacentToAnotherException;
 
-    void markHit(int x, int y);
+    void markHit(int x, int y) throws HittingTargetOutsideTheBoardException;
 
-    void markMiss(int x, int y);
+    void markMiss(int x, int y) throws HittingTargetOutsideTheBoardException;
 
-    HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombedException;
+    HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombedException, HittingTargetOutsideTheBoardException;
 
     String getName();
 

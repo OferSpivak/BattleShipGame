@@ -7,6 +7,6 @@ import engine.battleShip.BattleShip;
  */
 public class AddingShipAdjacentToAnotherException extends InitializationFailException {
     public AddingShipAdjacentToAnotherException(BattleShip ship, int x, int y) {
-        super("Adding the ship {" + ship.toString() + "} is impossible due to it been adjacent to another ship at " + x + 1 + ", " + y + 1 + "position");
+        super("Adding the ship {" + ship.toString() + "} is impossible due to it been adjacent to another ship at " + (x + 1) + ", " + (y + 1) + " position");
     }
 }

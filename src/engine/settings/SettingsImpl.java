@@ -6,7 +6,7 @@ import engine.enums.Direction;
 import exceptions.AddingShipsAboveAllowedAmountException;
 import exceptions.InitializationFailException;
 import exceptions.NotAllShipTypeAddedToBoardException;
-import exceptions.ShipTypeAlreadyDecalredException;
+import exceptions.ShipTypeAlreadyDeclaredException;
 
 import java.util.*;
 
@@ -50,7 +50,7 @@ public class SettingsImpl implements Settings {
 
             @Override
             public int getShipAmountOnBoard() {
-                return 2;
+                return 1;
             }
 
             @Override
@@ -72,7 +72,7 @@ public class SettingsImpl implements Settings {
 
             @Override
             public int getPositionX() {
-                return 1;
+                return 2;
             }
 
             @Override
@@ -98,12 +98,12 @@ public class SettingsImpl implements Settings {
 
             @Override
             public int getPositionX() {
-                return 3;
+                return 4;
             }
 
             @Override
             public int getPositionY() {
-                return 1;
+                return 3;
             }
 
             @Override
@@ -166,10 +166,10 @@ public class SettingsImpl implements Settings {
         player2Ships = addPlayerShips(player2ShipList);
     }
 
-    private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDecalredException {
+    private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDeclaredException {
         for (ShipType shipType : shipTypeList) {
             if (stringShipTypeMap.get(shipType.getType()) != null) {
-                throw new ShipTypeAlreadyDecalredException(shipType);
+                throw new ShipTypeAlreadyDeclaredException(shipType);
             }
             stringShipTypeMap.put(shipType.getType(), shipType);
         }

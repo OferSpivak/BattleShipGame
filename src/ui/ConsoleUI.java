@@ -4,6 +4,7 @@ import engine.EngineUIInterface;
 import engine.enums.HitBoardType;
 import engine.enums.TileState;
 import engine.player.Tile;
+import exceptions.HittingTargetOutsideTheBoardException;
 import exceptions.TileAlreadyBombedException;
 
 import java.util.InputMismatchException;
@@ -45,7 +46,7 @@ public class ConsoleUI {
                 System.out.println("1: Bomb Target");
                 System.out.println("2: Game Statistics");
                 System.out.println("3: Quit Game");
-                System.out.println("Enter your selection");
+                System.out.println("Enter your selection (1 / 2 / 3)");
                 int input = scanner.nextInt();
                 switch (input){
                     case 1:{
@@ -102,14 +103,16 @@ public class ConsoleUI {
 
     private void bombTarget() {
         boolean validInput = false;
+        int positionX = 1;
+        int positionY = 1;
         do {
             try {
                 System.out.println("Select your target (in x,y format)");
                 String input = scanner.nextLine();
                 String[] values = input.split(",");
                 if (values.length == 2) {
-                    int positionX = convertPositionToArrayIndex(Integer.parseInt(values[0]));
-                    int positionY = convertPositionToArrayIndex(Integer.parseInt(values[1]));
+                    positionX = convertPositionToArrayIndex(Integer.parseInt(values[0]));
+                    positionY = convertPositionToArrayIndex(Integer.parseInt(values[1]));
                     validInput = true;
                     HitBoardType bombResults = gameEngine.bombPoint(positionX, positionY);
                     switch (bombResults){
@@ -125,12 +128,19 @@ public class ConsoleUI {
                             System.out.println();
                         }
                     }
+                } else {
+                    System.out.println("Please enter your selection in the correct format");
                 }
             } catch (NumberFormatException e) {
                 validInput = false;
+                System.out.println("Please enter your selection in the correct format");
             } catch (TileAlreadyBombedException e) {
                 validInput = false;
-                System.out.println("Tile at position: " + e.getX() + "/" + e.getY() + " already bombed.");
+                System.out.println("Tile at position: " + (e.getX() + 1) + ", " + (e.getY() + 1) + " already bombed.");
+                System.out.println("Please try again");
+            } catch (HittingTargetOutsideTheBoardException e) {
+                validInput = false;
+                System.out.println("The position: " + (e.getX() + 1) + ", " + (e.getY() + 1) + " is outside the board");
                 System.out.println("Please try again");
             }
         } while (!validInput);
