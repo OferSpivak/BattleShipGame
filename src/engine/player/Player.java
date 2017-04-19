@@ -4,6 +4,7 @@ import engine.battleShip.BattleShip;
 import engine.enums.HitBoardType;
 import exceptions.AddingShipOutOfBoardBounds;
 import exceptions.AddingShipToNoneEmptyBoardTile;
+import exceptions.TileAlreadyBombed;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface Player {
 
     void markMiss(int x, int y);
 
-    HitBoardType tryToHitMyShip(int x, int y) throws Exception;
+    HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombed;
 
     String getName();
 

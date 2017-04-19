@@ -6,6 +6,7 @@ import engine.player.PlayerImpl;
 import engine.player.Tile;
 import engine.settings.Settings;
 import exceptions.InitializationFail;
+import exceptions.TileAlreadyBombed;
 
 /**
  * Created by Ofer.Spivak on 12/04/2017.
@@ -14,11 +15,11 @@ public class BaseGameEngine implements EngineUIInterface {
     Player currentPlayer;
     Player opponentPlayer;
 
-    public BaseGameEngine(Settings settings) throws InitializationFail{
+    public BaseGameEngine(Settings settings) throws InitializationFail {
         initGame(settings);
     }
 
-    private void initGame(Settings settings) throws InitializationFail{
+    private void initGame(Settings settings) throws InitializationFail {
         // create players
         currentPlayer = new PlayerImpl(settings.getPlayer1Name(), settings.getBoardSize());
         opponentPlayer = new PlayerImpl(settings.getPlayer2Name(), settings.getBoardSize());
@@ -34,25 +35,20 @@ public class BaseGameEngine implements EngineUIInterface {
         opponentPlayer = tmp;
     }
 
-    public HitBoardType bombPoint(int x, int y) {
-        try {
-            HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
-            switch (hit) {
-                case HIT: {
-                    currentPlayer.markHit(x, y);
-                    break;
-                }
-                case MISS: {
-                    currentPlayer.markMiss(x, y);
-                    switchPlayers();
-                    break;
-                }
+    public HitBoardType bombPoint(int x, int y) throws TileAlreadyBombed {
+        HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
+        switch (hit) {
+            case HIT: {
+                currentPlayer.markHit(x, y);
+                break;
             }
-            return hit;
-        } catch (Exception e) {
-            e.printStackTrace();
+            case MISS: {
+                currentPlayer.markMiss(x, y);
+                switchPlayers();
+                break;
+            }
         }
-        return null;
+        return hit;
     }
 
     public Tile[][] getCurrentPlayerOwnBoard() {
@@ -74,15 +70,15 @@ public class BaseGameEngine implements EngineUIInterface {
     public String getCurrentPlayerName() {
         return currentPlayer.getName();
     }
-    
+
     public String getOpponentPlayerName() {
         return opponentPlayer.getName();
     }
-    
+
     public int getCurrentPlayerScore() {
         return currentPlayer.getScore();
     }
-    
+
     public int getOpponentPlayerScore() {
         return opponentPlayer.getScore();
     }

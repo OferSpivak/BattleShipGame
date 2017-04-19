@@ -6,6 +6,7 @@ import engine.enums.HitBoardType;
 import engine.enums.TileState;
 import exceptions.AddingShipOutOfBoardBounds;
 import exceptions.AddingShipToNoneEmptyBoardTile;
+import exceptions.TileAlreadyBombed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,15 +53,15 @@ public class PlayerImpl implements Player {
         try {
             if (direction == Direction.ROW) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
-                    if (ownBoard[positionX][positionY + i].getState() != TileState.EMPTY){
-                        throw new AddingShipToNoneEmptyBoardTile(ship, positionX, positionY+i);
+                    if (ownBoard[positionX][positionY + i].getState() != TileState.EMPTY) {
+                        throw new AddingShipToNoneEmptyBoardTile(ship, positionX, positionY + i);
                     }
                     ownBoard[positionX][positionY + i] = new TileImpl(ship);
                 }
             } else if (direction == Direction.COLUMN) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
-                    if (ownBoard[positionX + i][positionY].getState() != TileState.EMPTY){
-                        throw new AddingShipToNoneEmptyBoardTile(ship, positionX+i, positionY);
+                    if (ownBoard[positionX + i][positionY].getState() != TileState.EMPTY) {
+                        throw new AddingShipToNoneEmptyBoardTile(ship, positionX + i, positionY);
                     }
                     ownBoard[positionX + i][positionY] = new TileImpl(ship);
                 }
@@ -72,7 +73,7 @@ public class PlayerImpl implements Player {
     }
 
     public void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBounds, AddingShipToNoneEmptyBoardTile {
-        for (BattleShip battleShip: battleShipList){
+        for (BattleShip battleShip : battleShipList) {
             addShip(battleShip);
         }
     }
@@ -96,7 +97,7 @@ public class PlayerImpl implements Player {
         }
     }
 
-    public HitBoardType tryToHitMyShip(int x, int y) throws Exception {
+    public HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombed {
         try {
             Tile tile = ownBoard[x][y];
             switch (tile.getState()) {
@@ -111,7 +112,7 @@ public class PlayerImpl implements Player {
                 }
                 case EMPTY_BOMBED:
                 case SHIP_BOMBED: {
-                    throw new Exception("already bombed"); //todo create a dedicated exception and let the ui figure what to do with it.
+                    throw new TileAlreadyBombed(x, y);
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {

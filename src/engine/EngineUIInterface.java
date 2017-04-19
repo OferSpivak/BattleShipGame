@@ -2,13 +2,14 @@ package engine;
 
 import engine.enums.HitBoardType;
 import engine.player.Tile;
+import exceptions.TileAlreadyBombed;
 
 /**
  * Created by Ofer.Spivak on 14/04/2017.
  */
 public interface EngineUIInterface {
 
-     HitBoardType bombPoint(int x, int y);
+     HitBoardType bombPoint(int x, int y) throws TileAlreadyBombed;
 
      Tile[][] getCurrentPlayerOwnBoard();
 
