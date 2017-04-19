@@ -4,6 +4,7 @@ import engine.battleShip.BattleShip;
 import engine.enums.Direction;
 import engine.enums.HitBoardType;
 import engine.enums.TileState;
+import exceptions.AddingShipAdjacentToAnotherException;
 import exceptions.AddingShipOutOfBoardBoundsException;
 import exceptions.AddingShipToNoneEmptyBoardTileException;
 import exceptions.TileAlreadyBombedException;
@@ -19,6 +20,7 @@ public class PlayerImpl implements Player {
     private Tile ownBoard[][];
     private ArrayList<BattleShip> ships = new ArrayList<>();
     private String name;
+    private int boardSize = 10;
     private int score = 0;
     private int missCount = 0;
     private int hitCount = 0;
@@ -40,12 +42,45 @@ public class PlayerImpl implements Player {
         }
     }
 
+    private boolean is2ShipsAdjacent(BattleShip ship, int positionX, int positionY){
+        if (positionX - 1 >= 0){
+            if (positionY - 1 >= 0 && ownBoard[positionX - 1][positionY - 1].getState() != TileState.EMPTY) {
+                return true;
+            }
+            if (positionY + 1 < boardSize && ownBoard[positionX - 1][positionY + 1].getState() != TileState.EMPTY){
+                return true;
+            }
+            if (ownBoard[positionX - 1][positionY].getState() != TileState.EMPTY && ownBoard[positionX - 1][positionY].getBattleShip() != ship){
+                return true;
+            }
+        }
+        if (positionX + 1 >= 0){
+            if (positionY - 1 >= 0 && ownBoard[positionX + 1][positionY - 1].getState() != TileState.EMPTY) {
+                return true;
+            }
+            if (positionY + 1 < boardSize && ownBoard[positionX + 1][positionY + 1].getState() != TileState.EMPTY){
+                return true;
+            }
+            if (ownBoard[positionX + 1][positionY].getState() != TileState.EMPTY && ownBoard[positionX + 1][positionY].getBattleShip() != ship){
+                return true;
+            }
+        }
+        if (positionY - 1 >= 0 && ownBoard[positionX][positionY - 1].getState() != TileState.EMPTY  && ownBoard[positionX][positionY - 1].getBattleShip() != ship) {
+            return true;
+        }
+        if (positionY + 1 < boardSize && ownBoard[positionX][positionY + 1].getState() != TileState.EMPTY  && ownBoard[positionX][positionY + 1].getBattleShip() != ship) {
+            return true;
+        }
+        return false;
+    }
+
     public PlayerImpl(String name, int boardSize) {
         this.name = name;
+        this.boardSize = boardSize;
         initBoards(boardSize);
     }
 
-    public void addShip(BattleShip ship) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException {
+    public void addShip(BattleShip ship) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException, AddingShipAdjacentToAnotherException {
         int positionX = ship.getPositionX();
         int positionY = ship.getPositionY();
         Direction direction = ship.getDirection();
@@ -56,12 +91,18 @@ public class PlayerImpl implements Player {
                     if (ownBoard[positionX][positionY + i].getState() != TileState.EMPTY) {
                         throw new AddingShipToNoneEmptyBoardTileException(ship, positionX, positionY + i);
                     }
+                    if (is2ShipsAdjacent(ship, positionX, positionY)) {
+                        throw new AddingShipAdjacentToAnotherException(ship, positionX, positionY + i);
+                    }
                     ownBoard[positionX][positionY + i] = new TileImpl(ship);
                 }
             } else if (direction == Direction.COLUMN) {
                 for (int i = 0; i < ship.getOriginalSize(); i++) {
                     if (ownBoard[positionX + i][positionY].getState() != TileState.EMPTY) {
                         throw new AddingShipToNoneEmptyBoardTileException(ship, positionX + i, positionY);
+                    }
+                    if (is2ShipsAdjacent(ship, positionX, positionY)) {
+                        throw new AddingShipAdjacentToAnotherException(ship, positionX + i, positionY);
                     }
                     ownBoard[positionX + i][positionY] = new TileImpl(ship);
                 }
@@ -72,7 +113,7 @@ public class PlayerImpl implements Player {
         }
     }
 
-    public void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException {
+    public void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException, AddingShipAdjacentToAnotherException {
         for (BattleShip battleShip : battleShipList) {
             addShip(battleShip);
         }

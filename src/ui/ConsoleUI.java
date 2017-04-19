@@ -70,8 +70,6 @@ public class ConsoleUI {
             }catch (InputMismatchException e){
                 validInput = false;
                 scanner.nextLine();
-            }catch (Exception e) {
-                //todo add
             }
         }while(!validInput);
         //todo - add menu options
