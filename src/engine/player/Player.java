@@ -2,9 +2,9 @@ package engine.player;
 
 import engine.battleShip.BattleShip;
 import engine.enums.HitBoardType;
-import exceptions.AddingShipOutOfBoardBounds;
-import exceptions.AddingShipToNoneEmptyBoardTile;
-import exceptions.TileAlreadyBombed;
+import exceptions.AddingShipOutOfBoardBoundsException;
+import exceptions.AddingShipToNoneEmptyBoardTileException;
+import exceptions.TileAlreadyBombedException;
 
 import java.util.List;
 
@@ -13,15 +13,15 @@ import java.util.List;
  */
 public interface Player {
 
-    void addShip(BattleShip ship) throws AddingShipOutOfBoardBounds, AddingShipToNoneEmptyBoardTile;
+    void addShip(BattleShip ship) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException;
 
-    void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBounds, AddingShipToNoneEmptyBoardTile;
+    void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException;
 
     void markHit(int x, int y);
 
     void markMiss(int x, int y);
 
-    HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombed;
+    HitBoardType tryToHitMyShip(int x, int y) throws TileAlreadyBombedException;
 
     String getName();
 

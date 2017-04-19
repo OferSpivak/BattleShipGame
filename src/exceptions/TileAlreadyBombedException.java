@@ -3,10 +3,10 @@ package exceptions;
 /**
  * Created by OFer.Spivak on 19/04/2017.
  */
-public class TileAlreadyBombed extends Exception {
+public class TileAlreadyBombedException extends Exception {
     int x, y;
 
-    public TileAlreadyBombed(int positionX, int poxistionY) {
+    public TileAlreadyBombedException(int positionX, int poxistionY) {
         super();
         x = positionX;
         y = poxistionY;

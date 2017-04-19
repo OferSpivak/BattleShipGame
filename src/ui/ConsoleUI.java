@@ -4,7 +4,7 @@ import engine.EngineUIInterface;
 import engine.enums.HitBoardType;
 import engine.enums.TileState;
 import engine.player.Tile;
-import exceptions.TileAlreadyBombed;
+import exceptions.TileAlreadyBombedException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -130,7 +130,7 @@ public class ConsoleUI {
                 }
             } catch (NumberFormatException e) {
                 validInput = false;
-            } catch (TileAlreadyBombed e) {
+            } catch (TileAlreadyBombedException e) {
                 validInput = false;
                 System.out.println("Tile at position: " + e.getX() + "/" + e.getY() + " already bombed.");
                 System.out.println("Please try again");

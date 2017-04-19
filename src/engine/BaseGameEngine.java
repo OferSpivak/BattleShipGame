@@ -5,8 +5,8 @@ import engine.player.Player;
 import engine.player.PlayerImpl;
 import engine.player.Tile;
 import engine.settings.Settings;
-import exceptions.InitializationFail;
-import exceptions.TileAlreadyBombed;
+import exceptions.InitializationFailException;
+import exceptions.TileAlreadyBombedException;
 
 /**
  * Created by Ofer.Spivak on 12/04/2017.
@@ -15,11 +15,11 @@ public class BaseGameEngine implements EngineUIInterface {
     Player currentPlayer;
     Player opponentPlayer;
 
-    public BaseGameEngine(Settings settings) throws InitializationFail {
+    public BaseGameEngine(Settings settings) throws InitializationFailException {
         initGame(settings);
     }
 
-    private void initGame(Settings settings) throws InitializationFail {
+    private void initGame(Settings settings) throws InitializationFailException {
         // create players
         currentPlayer = new PlayerImpl(settings.getPlayer1Name(), settings.getBoardSize());
         opponentPlayer = new PlayerImpl(settings.getPlayer2Name(), settings.getBoardSize());
@@ -35,7 +35,7 @@ public class BaseGameEngine implements EngineUIInterface {
         opponentPlayer = tmp;
     }
 
-    public HitBoardType bombPoint(int x, int y) throws TileAlreadyBombed {
+    public HitBoardType bombPoint(int x, int y) throws TileAlreadyBombedException {
         HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
         switch (hit) {
             case HIT: {

@@ -3,10 +3,10 @@ package engine.settings;
 import engine.battleShip.BattleShip;
 import engine.battleShip.BattleShipImpl;
 import engine.enums.Direction;
-import exceptions.AddingShipsAboveAllowedAmount;
-import exceptions.InitializationFail;
-import exceptions.NotAllShipTypeAddedToBoard;
-import exceptions.ShipTypeAlreadyDecalred;
+import exceptions.AddingShipsAboveAllowedAmountException;
+import exceptions.InitializationFailException;
+import exceptions.NotAllShipTypeAddedToBoardException;
+import exceptions.ShipTypeAlreadyDecalredException;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ public class SettingsImpl implements Settings {
 
     //todo ship types, boards size etc... should come from the DAL
     // constructor should get list of shipTypes, list of player1 ships, player2 ships
-    public SettingsImpl() throws InitializationFail {
+    public SettingsImpl() throws InitializationFailException {
         // adding ship types
         ShipType shipTypeA = new ShipType() {
             @Override
@@ -166,16 +166,16 @@ public class SettingsImpl implements Settings {
         player2Ships = addPlayerShips(player2ShipList);
     }
 
-    private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDecalred {
+    private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDecalredException {
         for (ShipType shipType : shipTypeList) {
             if (stringShipTypeMap.get(shipType.getType()) != null) {
-                throw new ShipTypeAlreadyDecalred(shipType);
+                throw new ShipTypeAlreadyDecalredException(shipType);
             }
             stringShipTypeMap.put(shipType.getType(), shipType);
         }
     }
 
-    private List<BattleShip> addPlayerShips(List<Ship> playerShipList) throws AddingShipsAboveAllowedAmount, NotAllShipTypeAddedToBoard {
+    private List<BattleShip> addPlayerShips(List<Ship> playerShipList) throws AddingShipsAboveAllowedAmountException, NotAllShipTypeAddedToBoardException {
         List<BattleShip> playerBattleShips = new ArrayList<>();
         // initializing the shipTypeCount for Player
         Map<String, Integer> shipTypeCount = new HashMap<>();
@@ -187,7 +187,7 @@ public class SettingsImpl implements Settings {
             ShipType shipType = ship.getShipType();
             int currentCount = shipTypeCount.get(shipType.getType());
             if (currentCount == 0) {
-               throw new AddingShipsAboveAllowedAmount(ship);
+               throw new AddingShipsAboveAllowedAmountException(ship);
             }
             shipTypeCount.remove(shipType.getType());
             shipTypeCount.put(shipType.getType(), currentCount - 1);
@@ -203,7 +203,7 @@ public class SettingsImpl implements Settings {
         for (String key : stringShipTypeMap.keySet()) {
             int count = shipTypeCount.get(key);
             if (count != 0) {
-                throw new NotAllShipTypeAddedToBoard(key);
+                throw new NotAllShipTypeAddedToBoardException(key);
             }
         }
 
