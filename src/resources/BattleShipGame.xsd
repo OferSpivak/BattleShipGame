@@ -11,6 +11,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="boardSize" type="xs:int"/>
                 <xs:element name="shipTypes">
                     <xs:complexType>
                         <xs:sequence>
@@ -31,8 +32,8 @@
                                             <xs:element name="path">
                                                 <xs:complexType>
                                                     <xs:sequence>
-                                                        <xs:element name="firstAxisLength" type="xs:positiveInteger"/>
-                                                        <xs:element name="secondAxisLength" type="xs:positiveInteger"/>
+                                                        <xs:element name="firstAxisLength" type="xs:int"/>
+                                                        <xs:element name="secondAxisLength" type="xs:int"/>
                                                     </xs:sequence>
                                                 </xs:complexType>
                                             </xs:element>
@@ -56,8 +57,8 @@
                                                     <xs:element name="type" type="xs:string"/>
                                                     <xs:element name="position">
                                                         <xs:complexType>
-                                                            <xs:attribute name="x" type="xs:positiveInteger"/>
-                                                            <xs:attribute name="y" type="xs:positiveInteger"/>
+                                                            <xs:attribute name="x" type="xs:int"/>
+                                                            <xs:attribute name="y" type="xs:int"/>
                                                         </xs:complexType>
                                                     </xs:element>
                                                     <xs:element name="direction">
