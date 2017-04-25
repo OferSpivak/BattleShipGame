@@ -1,3 +1,4 @@
+import dal.DalImpl;
 import engine.BaseGameEngine;
 import engine.settings.Settings;
 import engine.settings.SettingsImpl;
@@ -9,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            DalImpl dal = new DalImpl("C:\\Users\\OFer.Spivak\\Documents\\personal\\BattleShipGame\\src\\resources\\baseInput.xml");
             Settings settings = new SettingsImpl();
             BaseGameEngine gameEngine = new BaseGameEngine(settings);
             ConsoleUI consoleUI = new ConsoleUI(gameEngine);
