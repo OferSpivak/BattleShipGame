@@ -1,5 +1,7 @@
 package engine.settings;
 
+import dal.Ship;
+import dal.ShipType;
 import engine.battleShip.BattleShip;
 import engine.battleShip.BattleShipImpl;
 import engine.enums.Direction;
@@ -38,7 +40,12 @@ public class SettingsImpl implements Settings {
             }
 
             @Override
-            public String getType() {
+            public shipTypeStyle getType() {
+                return shipTypeStyle.Regular;
+            }
+
+            @Override
+            public String getShipTypeName() {
                 return "A";
             }
         };
@@ -54,7 +61,12 @@ public class SettingsImpl implements Settings {
             }
 
             @Override
-            public String getType() {
+            public shipTypeStyle getType() {
+                return shipTypeStyle.Regular;
+            }
+
+            @Override
+            public String getShipTypeName() {
                 return "B";
             }
         };
@@ -168,10 +180,10 @@ public class SettingsImpl implements Settings {
 
     private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDeclaredException {
         for (ShipType shipType : shipTypeList) {
-            if (stringShipTypeMap.get(shipType.getType()) != null) {
+            if (stringShipTypeMap.get(shipType.getShipTypeName()) != null) {
                 throw new ShipTypeAlreadyDeclaredException(shipType);
             }
-            stringShipTypeMap.put(shipType.getType(), shipType);
+            stringShipTypeMap.put(shipType.getShipTypeName(), shipType);
         }
     }
 
@@ -185,12 +197,12 @@ public class SettingsImpl implements Settings {
 
         for (Ship ship : playerShipList) {
             ShipType shipType = ship.getShipType();
-            int currentCount = shipTypeCount.get(shipType.getType());
+            int currentCount = shipTypeCount.get(shipType.getShipTypeName());
             if (currentCount == 0) {
                throw new AddingShipsAboveAllowedAmountException(ship);
             }
-            shipTypeCount.remove(shipType.getType());
-            shipTypeCount.put(shipType.getType(), currentCount - 1);
+            shipTypeCount.remove(shipType.getShipTypeName());
+            shipTypeCount.put(shipType.getShipTypeName(), currentCount - 1);
             BattleShip battleShip = new BattleShipImpl(
                     shipType.getShipSize(),
                     ship.getDirection(),

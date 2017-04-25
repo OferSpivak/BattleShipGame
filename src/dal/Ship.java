@@ -1,4 +1,4 @@
-package engine.settings;
+package dal;
 
 import engine.enums.Direction;
 

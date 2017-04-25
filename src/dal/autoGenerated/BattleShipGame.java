@@ -581,11 +581,11 @@ public class BattleShipGame {
                 public static class Position {
 
                     @XmlAttribute(name = "x")
-                    @XmlSchemaType(name = "positiveInteger")
-                    protected BigInteger x;
+                    @XmlSchemaType(name = "int")
+                    protected Integer x;
                     @XmlAttribute(name = "y")
-                    @XmlSchemaType(name = "positiveInteger")
-                    protected BigInteger y;
+                    @XmlSchemaType(name = "int")
+                    protected Integer y;
 
                     /**
                      * Gets the value of the x property.
@@ -595,7 +595,7 @@ public class BattleShipGame {
                      *     {@link BigInteger }
                      *     
                      */
-                    public BigInteger getX() {
+                    public Integer getX() {
                         return x;
                     }
 
@@ -607,7 +607,7 @@ public class BattleShipGame {
                      *     {@link BigInteger }
                      *     
                      */
-                    public void setX(BigInteger value) {
+                    public void setX(Integer value) {
                         this.x = value;
                     }
 
@@ -619,7 +619,7 @@ public class BattleShipGame {
                      *     {@link BigInteger }
                      *     
                      */
-                    public BigInteger getY() {
+                    public Integer getY() {
                         return y;
                     }
 
@@ -631,7 +631,7 @@ public class BattleShipGame {
                      *     {@link BigInteger }
                      *     
                      */
-                    public void setY(BigInteger value) {
+                    public void setY(Integer value) {
                         this.y = value;
                     }
 

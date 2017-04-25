@@ -1,6 +1,6 @@
 package exceptions;
 
-import engine.settings.Ship;
+import dal.Ship;
 
 /**
  * Created by OFer.Spivak on 18/04/2017.
