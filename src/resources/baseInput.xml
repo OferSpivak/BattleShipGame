@@ -1,26 +1,34 @@
 <?xml version="1.0"?>
 <BattleShipGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BattleShipGame.xsd">
-    <type>Basic</type>
+    <GameType>Basic</GameType>
     <shipTypes>
         <shipType name="A">
             <type>Regular</type>
-            <length>4</length>
             <amount>1</amount>
+            <length>4</length>
         </shipType>
         <shipType name="B">
             <type>Regular</type>
-            <length>3</length>
             <amount>2</amount>
+            <length>3</length>
         </shipType>
         <shipType name="C">
             <type>Regular</type>
-            <length>2</length>
             <amount>3</amount>
+            <length>2</length>
         </shipType>
         <shipType name="D">
             <type>Regular</type>
-            <length>1</length>
             <amount>4</amount>
+            <length>1</length>
+        </shipType>
+        <shipType name="E">
+            <type>Complex</type>
+            <amount>4</amount>
+            <path>
+                <firstAxisLength>2</firstAxisLength>
+                <secondAxisLength>3</secondAxisLength>
+            </path>
         </shipType>
     </shipTypes>
     <boards>
