@@ -22,14 +22,14 @@
             <amount>4</amount>
             <length>1</length>
         </shipType>
-        <shipType name="E">
+        <!--<shipType name="E">
             <type>Complex</type>
             <amount>4</amount>
             <path>
                 <firstAxisLength>2</firstAxisLength>
                 <secondAxisLength>3</secondAxisLength>
             </path>
-        </shipType>
+        </shipType>-->
     </shipTypes>
     <boards>
         <board>
