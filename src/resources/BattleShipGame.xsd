@@ -64,8 +64,8 @@
                                                     <xs:element name="direction">
                                                         <xs:simpleType>
                                                             <xs:restriction base="xs:string">
-                                                                <xs:enumeration value="Row"/>
-                                                                <xs:enumeration value="Column"/>
+                                                                <xs:enumeration value="ROW"/>
+                                                                <xs:enumeration value="COLUMN"/>
                                                             </xs:restriction>
                                                         </xs:simpleType>
                                                     </xs:element>

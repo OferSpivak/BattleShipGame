@@ -1,5 +1,6 @@
 package engine.settings;
 
+import dal.DalImpl;
 import dal.Ship;
 import dal.ShipType;
 import engine.battleShip.BattleShip;
@@ -176,6 +177,14 @@ public class SettingsImpl implements Settings {
 
         player1Ships = addPlayerShips(player1ShipList);
         player2Ships = addPlayerShips(player2ShipList);
+    }
+
+    public SettingsImpl(DalImpl dal) throws InitializationFailException {
+        this.boardSize = dal.getBoardSize();
+        stringShipTypeMap = new HashMap<>();
+        setShipTypes(dal.getShipTypeList());
+        player1Ships = addPlayerShips(dal.getBoard(1));
+        player2Ships = addPlayerShips(dal.getBoard(2));
     }
 
     private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDeclaredException {

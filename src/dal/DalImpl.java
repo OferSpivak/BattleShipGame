@@ -56,7 +56,12 @@ public class DalImpl {
 
                 @Override
                 public shipTypeStyle getType() {
-                    return shipTypeStyle.valueOf(xmlShipType.getType());
+                    try {
+                        return shipTypeStyle.valueOf(xmlShipType.getType());
+                    } catch (IllegalArgumentException e) {
+                        // todo - add initialization exception
+                        throw e;
+                    }
                 }
 
                 @Override
@@ -76,7 +81,12 @@ public class DalImpl {
             Ship ship = new Ship() {
                 @Override
                 public Direction getDirection() {
-                    return Direction.valueOf(xmlShip.getDirection());
+                    try {
+                        return Direction.valueOf(xmlShip.getDirection());
+                    } catch (IllegalArgumentException e){
+                        // todo - add initialization exception
+                        throw e;
+                    }
                 }
 
                 @Override
@@ -104,5 +114,7 @@ public class DalImpl {
         return board;
     }
 
-
+    public int getBoardSize(){
+        return battleShipGame.getBoardSize();
+    }
 }
