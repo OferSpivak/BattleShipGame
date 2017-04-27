@@ -38,6 +38,7 @@
                                                 </xs:complexType>
                                             </xs:element>
                                         </xs:choice>
+                                        <xs:element name="score" type="xs:int"/>
                                     </xs:sequence>
                                     <xs:attribute name="name" type="xs:string" use="required"/>
                                 </xs:complexType>
@@ -69,7 +70,6 @@
                                                             </xs:restriction>
                                                         </xs:simpleType>
                                                     </xs:element>
-                                                    <xs:element name="score" type="xs:int"/>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>

@@ -23,6 +23,8 @@ public class SettingsImpl implements Settings {
     private Map<String, ShipType> stringShipTypeMap;
     private List<BattleShip> player1Ships;
     private List<BattleShip> player2Ships;
+    private int totalShipsTilesAmount = 0;
+    private int totalShipsScore = 0;
 
 
     //todo ship types, boards size etc... should come from the DAL
@@ -49,6 +51,11 @@ public class SettingsImpl implements Settings {
             public String getShipTypeName() {
                 return "A";
             }
+
+            @Override
+            public int getScore() {
+                return 0;
+            }
         };
         ShipType shipTypeB = new ShipType() {
             @Override
@@ -69,6 +76,11 @@ public class SettingsImpl implements Settings {
             @Override
             public String getShipTypeName() {
                 return "B";
+            }
+
+            @Override
+            public int getScore() {
+                return 0;
             }
         };
         List<ShipType> shipTypeList = Arrays.asList(shipTypeA, shipTypeB);
@@ -193,6 +205,8 @@ public class SettingsImpl implements Settings {
                 throw new ShipTypeAlreadyDeclaredException(shipType);
             }
             stringShipTypeMap.put(shipType.getShipTypeName(), shipType);
+            totalShipsTilesAmount += shipType.getShipSize() * shipType.getShipAmountOnBoard();
+            totalShipsScore += shipType.getScore();
         }
     }
 
@@ -216,7 +230,8 @@ public class SettingsImpl implements Settings {
                     shipType.getShipSize(),
                     ship.getDirection(),
                     convertPositionToArrayIndex(ship.getPositionX()),
-                    convertPositionToArrayIndex(ship.getPositionY())
+                    convertPositionToArrayIndex(ship.getPositionY()),
+                    shipType.getScore()
             );
             playerBattleShips.add(battleShip);
         }
@@ -261,6 +276,14 @@ public class SettingsImpl implements Settings {
 
     public List<BattleShip> getPlayer2Ships() {
         return player2Ships;
+    }
+
+    public int getTotalShipsTilesAmount() {
+        return totalShipsTilesAmount;
+    }
+
+    public int getTotalShipsScore() {
+        return totalShipsScore;
     }
 
     private int convertPositionToArrayIndex(int position) {

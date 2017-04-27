@@ -13,4 +13,5 @@ public interface ShipType {
     int getShipAmountOnBoard();
     shipTypeStyle getType();
     String getShipTypeName();
+    int getScore();
 }

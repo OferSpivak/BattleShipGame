@@ -7,21 +7,25 @@
             <type>Regular</type>
             <amount>1</amount>
             <length>4</length>
+            <score>1</score>
         </shipType>
         <shipType name="B">
             <type>Regular</type>
             <amount>2</amount>
             <length>3</length>
+            <score>1</score>
         </shipType>
         <shipType name="C">
             <type>Regular</type>
             <amount>3</amount>
             <length>2</length>
+            <score>1</score>
         </shipType>
         <shipType name="D">
             <type>Regular</type>
             <amount>4</amount>
             <length>1</length>
+            <score>1</score>
         </shipType>
         <!--<shipType name="E">
             <type>Complex</type>
@@ -38,13 +42,11 @@
                 <type>A</type>
                 <position x="1" y="1" />
                 <direction>ROW</direction>
-                <score>1</score>
             </ship>
             <ship>
                 <type>B</type>
                 <position x="2" y="2" />
                 <direction>COLUMN</direction>
-                <score>1</score>
             </ship>
         </board>
         <board>
@@ -52,13 +54,11 @@
                 <type>A</type>
                 <position x="1" y="1" />
                 <direction>COLUMN</direction>
-                <score>1</score>
             </ship>
             <ship>
                 <type>B</type>
                 <position x="2" y="2" />
                 <direction>ROW</direction>
-                <score>1</score>
             </ship>
         </board>
     </boards>

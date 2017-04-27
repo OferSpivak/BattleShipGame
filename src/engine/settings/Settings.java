@@ -25,4 +25,8 @@ public interface Settings {
 
     List<BattleShip> getPlayer2Ships();
 
+    int getTotalShipsTilesAmount();
+
+    int getTotalShipsScore();
+
 }

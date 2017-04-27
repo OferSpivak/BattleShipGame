@@ -13,11 +13,13 @@ import exceptions.TileAlreadyBombedException;
  * Created by Ofer.Spivak on 12/04/2017.
  */
 public class BaseGameEngine implements EngineUIInterface {
-    Player currentPlayer;
-    Player opponentPlayer;
+    private Player currentPlayer;
+    private  Player opponentPlayer;
+    private int scoreToWin;
 
     public BaseGameEngine(Settings settings) throws InitializationFailException {
         initGame(settings);
+        scoreToWin = settings.getTotalShipsTilesAmount();
     }
 
     private void initGame(Settings settings) throws InitializationFailException {
@@ -40,7 +42,8 @@ public class BaseGameEngine implements EngineUIInterface {
         HitBoardType hit = opponentPlayer.tryToHitMyShip(x, y);
         switch (hit) {
             case HIT: {
-                currentPlayer.markHit(x, y);
+                int hitShipScore = opponentPlayer.getShipScore(x, y);
+                currentPlayer.markHit(x, y, hitShipScore);
                 break;
             }
             case MISS: {
@@ -77,11 +80,11 @@ public class BaseGameEngine implements EngineUIInterface {
     }
 
     public int getCurrentPlayerScore() {
-        return currentPlayer.getScore();
+        return currentPlayer.getHitCount();
     }
 
     public int getOpponentPlayerScore() {
-        return opponentPlayer.getScore();
+        return opponentPlayer.getHitCount();
     }
 
     public int getCurrentPlayerHitCount() {
@@ -98,5 +101,9 @@ public class BaseGameEngine implements EngineUIInterface {
 
     public int getOpponentPlayerMissCount() {
         return opponentPlayer.getMissCount();
+    }
+
+    public boolean isCurrentPlayerWon() {
+        return getCurrentPlayerHitCount() == scoreToWin;
     }
 }

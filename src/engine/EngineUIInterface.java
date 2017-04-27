@@ -32,4 +32,6 @@ public interface EngineUIInterface {
 
      int getOpponentPlayerMissCount();
 
+     boolean isCurrentPlayerWon();
+
 }

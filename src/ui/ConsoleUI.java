@@ -28,6 +28,7 @@ public class ConsoleUI {
         while (shouldRunGame) {
             printCurrentPlayerState();
             getMenuSelection();
+            isPlayerWon();
         }
         printEndGame();
     }
@@ -144,6 +145,12 @@ public class ConsoleUI {
                 System.out.println("Please try again");
             }
         } while (!validInput);
+    }
+
+    private void isPlayerWon() {
+        if (gameEngine.isCurrentPlayerWon()){
+            shouldRunGame = false;
+        }
     }
 
     private void drawBoards(Tile[][] ownBoard, HitBoardType[][] hitBoard) {

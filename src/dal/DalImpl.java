@@ -68,6 +68,11 @@ public class DalImpl {
                 public String getShipTypeName() {
                     return xmlShipType.getName();
                 }
+
+                @Override
+                public int getScore() {
+                    return xmlShipType.getScore();
+                }
             };
             shipTypeList.add(shipType);
         }

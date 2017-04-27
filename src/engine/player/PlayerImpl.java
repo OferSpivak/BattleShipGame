@@ -39,33 +39,33 @@ public class PlayerImpl implements Player {
         }
     }
 
-    private boolean is2ShipsAdjacent(BattleShip ship, int positionX, int positionY){
-        if (positionX - 1 >= 0){
+    private boolean is2ShipsAdjacent(BattleShip ship, int positionX, int positionY) {
+        if (positionX - 1 >= 0) {
             if (positionY - 1 >= 0 && ownBoard[positionX - 1][positionY - 1].getState() != TileState.EMPTY) {
                 return true;
             }
-            if (positionY + 1 < boardSize && ownBoard[positionX - 1][positionY + 1].getState() != TileState.EMPTY){
+            if (positionY + 1 < boardSize && ownBoard[positionX - 1][positionY + 1].getState() != TileState.EMPTY) {
                 return true;
             }
-            if (ownBoard[positionX - 1][positionY].getState() != TileState.EMPTY && ownBoard[positionX - 1][positionY].getBattleShip() != ship){
+            if (ownBoard[positionX - 1][positionY].getState() != TileState.EMPTY && ownBoard[positionX - 1][positionY].getBattleShip() != ship) {
                 return true;
             }
         }
-        if (positionX + 1 >= 0){
+        if (positionX + 1 >= 0) {
             if (positionY - 1 >= 0 && ownBoard[positionX + 1][positionY - 1].getState() != TileState.EMPTY) {
                 return true;
             }
-            if (positionY + 1 < boardSize && ownBoard[positionX + 1][positionY + 1].getState() != TileState.EMPTY){
+            if (positionY + 1 < boardSize && ownBoard[positionX + 1][positionY + 1].getState() != TileState.EMPTY) {
                 return true;
             }
-            if (ownBoard[positionX + 1][positionY].getState() != TileState.EMPTY && ownBoard[positionX + 1][positionY].getBattleShip() != ship){
+            if (ownBoard[positionX + 1][positionY].getState() != TileState.EMPTY && ownBoard[positionX + 1][positionY].getBattleShip() != ship) {
                 return true;
             }
         }
-        if (positionY - 1 >= 0 && ownBoard[positionX][positionY - 1].getState() != TileState.EMPTY  && ownBoard[positionX][positionY - 1].getBattleShip() != ship) {
+        if (positionY - 1 >= 0 && ownBoard[positionX][positionY - 1].getState() != TileState.EMPTY && ownBoard[positionX][positionY - 1].getBattleShip() != ship) {
             return true;
         }
-        if (positionY + 1 < boardSize && ownBoard[positionX][positionY + 1].getState() != TileState.EMPTY  && ownBoard[positionX][positionY + 1].getBattleShip() != ship) {
+        if (positionY + 1 < boardSize && ownBoard[positionX][positionY + 1].getState() != TileState.EMPTY && ownBoard[positionX][positionY + 1].getBattleShip() != ship) {
             return true;
         }
         return false;
@@ -116,11 +116,11 @@ public class PlayerImpl implements Player {
         }
     }
 
-    public void markHit(int x, int y) throws HittingTargetOutsideTheBoardException { //user successfully hit the opponent ship
+    public void markHit(int x, int y, int shipScore) throws HittingTargetOutsideTheBoardException { //user successfully hit the opponent ship
         try {
             hitBoard[x][y] = HitBoardType.HIT;
             hitCount++;
-            score++; //todo check how to calc score;
+            score += shipScore;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new HittingTargetOutsideTheBoardException(x, y);
         }
@@ -185,5 +185,10 @@ public class PlayerImpl implements Player {
 
     public Tile[][] getOwnBoard() {
         return ownBoard.clone();
+    }
+
+    public int getShipScore(int x, int y) {
+        Tile tile = ownBoard[x][y];
+        return tile.getBattleShip().getScore();
     }
 }

@@ -10,14 +10,16 @@ public class BattleShipImpl implements BattleShip{
     private int originalSize;
     private int positionX;
     private int positionY;
+    private int score;
     private Direction direction;
     //int score; //todo - to figure out if i gonna used it at the next HW
 
-    public BattleShipImpl(int size, Direction direction, int positionX, int positionY) {
+    public BattleShipImpl(int size, Direction direction, int positionX, int positionY, int score) {
         originalSize = currentSize = size;
         this.direction = direction;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.score = score;
     }
 
     public int getCurrentSize() {
@@ -46,6 +48,10 @@ public class BattleShipImpl implements BattleShip{
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     @Override

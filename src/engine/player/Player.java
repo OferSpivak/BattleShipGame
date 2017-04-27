@@ -15,7 +15,7 @@ public interface Player {
 
     void addShips(List<BattleShip> battleShipList) throws AddingShipOutOfBoardBoundsException, AddingShipToNoneEmptyBoardTileException, AddingShipAdjacentToAnotherException;
 
-    void markHit(int x, int y) throws HittingTargetOutsideTheBoardException;
+    void markHit(int x, int y, int shipScore) throws HittingTargetOutsideTheBoardException;
 
     void markMiss(int x, int y) throws HittingTargetOutsideTheBoardException;
 
@@ -34,4 +34,6 @@ public interface Player {
     HitBoardType[][] getHitBoard();
 
     Tile[][] getOwnBoard();
+
+    int getShipScore(int x, int y);
 }
