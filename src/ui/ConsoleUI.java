@@ -16,11 +16,17 @@ import java.util.Scanner;
 public class ConsoleUI {
     private EngineUIInterface gameEngine;
     private Scanner scanner;
-    private boolean shouldRunGame;
+    private boolean shouldRunGame = false;
 
-    public ConsoleUI(EngineUIInterface gameEngine) {
-        this.gameEngine = gameEngine;
+    public ConsoleUI() {
         scanner = new Scanner(System.in);
+        System.out.println("******************************");
+        System.out.println("*** Welcome to Battle Ship ***");
+        System.out.println("******************************");
+    }
+
+    public void initConsoleWithGameEngine(EngineUIInterface gameEngine) {
+        this.gameEngine = gameEngine;
         shouldRunGame = true;
     }
 
@@ -31,6 +37,13 @@ public class ConsoleUI {
             isPlayerWon();
         }
         printEndGame();
+    }
+
+    public String askForGameSettingPath(){
+            System.out.println("Please Enter the path to the game setting XML file");
+            String input = scanner.nextLine();
+            // validate the path ends with XML
+            return input;
     }
 
     private void printCurrentPlayerState() {

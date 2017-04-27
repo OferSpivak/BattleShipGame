@@ -10,10 +10,12 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            DalImpl dal = new DalImpl("C:\\Users\\OFer.Spivak\\Documents\\personal\\BattleShipGame\\src\\resources\\baseInput5.xml");
+            ConsoleUI consoleUI = new ConsoleUI();
+            String path = consoleUI.askForGameSettingPath();
+            DalImpl dal = new DalImpl(path);
             Settings settings = new SettingsImpl(dal);
             BaseGameEngine gameEngine = new BaseGameEngine(settings);
-            ConsoleUI consoleUI = new ConsoleUI(gameEngine);
+            consoleUI.initConsoleWithGameEngine(gameEngine);
             consoleUI.startGAme();
         } catch (InitializationFailException initializationFailException){
             System.out.println("***** Fail to initialize the Game *****");
