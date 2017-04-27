@@ -51,7 +51,7 @@ public class PlayerImpl implements Player {
                 return true;
             }
         }
-        if (positionX + 1 >= 0) {
+        if (positionX + 1 < boardSize) {
             if (positionY - 1 >= 0 && ownBoard[positionX + 1][positionY - 1].getState() != TileState.EMPTY) {
                 return true;
             }

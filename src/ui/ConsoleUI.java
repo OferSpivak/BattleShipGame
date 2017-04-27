@@ -119,7 +119,9 @@ public class ConsoleUI {
                     switch (bombResults){
                         case HIT:{
                             System.out.println("You HIT Your target :-)");
-                            System.out.println("Please Play Again");
+                            if (!gameEngine.isCurrentPlayerWon()){
+                                System.out.println("Please Play Again");
+                            }
                             System.out.println();
                             break;
                         }

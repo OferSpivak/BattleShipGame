@@ -195,8 +195,8 @@ public class SettingsImpl implements Settings {
         this.boardSize = dal.getBoardSize();
         stringShipTypeMap = new HashMap<>();
         setShipTypes(dal.getShipTypeList());
-        player1Ships = addPlayerShips(dal.getBoard(1));
-        player2Ships = addPlayerShips(dal.getBoard(2));
+        player1Ships = addPlayerShips(dal.getBoard(0));
+        player2Ships = addPlayerShips(dal.getBoard(1));
     }
 
     private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDeclaredException {

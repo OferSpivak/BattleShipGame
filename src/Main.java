@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            DalImpl dal = new DalImpl("C:\\Users\\OFer.Spivak\\Documents\\personal\\BattleShipGame\\src\\resources\\baseInput.xml");
+            DalImpl dal = new DalImpl("C:\\Users\\OFer.Spivak\\Documents\\personal\\BattleShipGame\\src\\resources\\baseInput5.xml");
             Settings settings = new SettingsImpl(dal);
             BaseGameEngine gameEngine = new BaseGameEngine(settings);
             ConsoleUI consoleUI = new ConsoleUI(gameEngine);
