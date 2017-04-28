@@ -201,7 +201,7 @@ public class SettingsImpl implements Settings {
 
     private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDeclaredException {
         for (ShipType shipType : shipTypeList) {
-            if (stringShipTypeMap.get(shipType.getShipTypeName()) != null) {
+            if (stringShipTypeMap.containsKey(shipType.getShipTypeName())) {
                 throw new ShipTypeAlreadyDeclaredException(shipType);
             }
             stringShipTypeMap.put(shipType.getShipTypeName(), shipType);
@@ -224,8 +224,7 @@ public class SettingsImpl implements Settings {
             if (currentCount == 0) {
                throw new AddingShipsAboveAllowedAmountException(ship);
             }
-            shipTypeCount.remove(shipType.getShipTypeName());
-            shipTypeCount.put(shipType.getShipTypeName(), currentCount - 1);
+            shipTypeCount.replace(shipType.getShipTypeName(), currentCount - 1);
             BattleShip battleShip = new BattleShipImpl(
                     shipType.getShipSize(),
                     ship.getDirection(),
