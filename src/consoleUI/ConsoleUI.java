@@ -1,4 +1,4 @@
-package ui;
+package consoleUI;
 
 import engine.EngineUIInterface;
 import engine.enums.HitBoardType;

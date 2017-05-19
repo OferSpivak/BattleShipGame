@@ -1,9 +1,10 @@
+package consoleUI;
+
 import dal.DalImpl;
 import engine.BaseGameEngine;
 import engine.settings.Settings;
 import engine.settings.SettingsImpl;
 import exceptions.InitializationFailException;
-import ui.ConsoleUI;
 
 
 public class Main {
