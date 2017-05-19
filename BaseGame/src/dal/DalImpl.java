@@ -19,15 +19,19 @@ public class DalImpl {
     private List<ShipType> shipTypeList = null;
 
     public DalImpl(String path) throws InitializationFailException {
+        this(new File(path));
+    }
+
+    public DalImpl(File file) throws InitializationFailException {
         try {
-            File file = new File(path);
             JAXBContext jaxbContext = JAXBContext.newInstance(BattleShipGame.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             battleShipGame = (BattleShipGame) unmarshaller.unmarshal(file);
         } catch (JAXBException e) {
-            throw new InitializationFailException("Failed to read and parse the file in path: " + path);
+
+            throw new InitializationFailException("Failed to read and parse the file in path: " + file.getPath());
         } catch (Exception e) {
-            throw new InitializationFailException("Failed to read file in path: " + path + " due to " + e.getMessage());
+            throw new InitializationFailException("Failed to read file in path: " + file.getPath() + " due to " + e.getMessage());
         }
     }
 
