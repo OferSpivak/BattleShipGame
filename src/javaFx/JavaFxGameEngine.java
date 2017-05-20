@@ -5,7 +5,10 @@ import exceptions.HittingTargetOutsideTheBoardException;
 import exceptions.InitializationFailException;
 import exceptions.TileAlreadyBombedException;
 import gameInterface.GameInterface;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -32,6 +35,7 @@ public class JavaFxGameEngine {
     private Stage stage;
     private Scene scene;
     private RootController controller;
+    private boolean preventPlaying = true;
 
     private int boardSize;
     private int tileSize;
@@ -56,12 +60,13 @@ public class JavaFxGameEngine {
             try {
                 gameInterface.initializeGame(file);
                 boardSize = gameInterface.getBoardSize();
-                controller.setErrorText("");
+                controller.clearErrorText();
                 loadGameSettingsBtn.setDisable(true);
                 initializedPlayers();
                 currentPlayer = player1;
                 opponentPlayer = player2;
                 initializeRootMainArea(scene);
+                preventPlaying = false;
             } catch (InitializationFailException initializationFailException) {
                 controller.setErrorText(initializationFailException.toString());
             }
@@ -105,10 +110,18 @@ public class JavaFxGameEngine {
                 int finalRow = row;
                 int finalColumn = column;
                 pane.setOnMouseClicked(e -> {
-                    pane.getChildren().add(tileClicked(finalRow, finalColumn));
-                    updateStatistics();
-                    if (isSwitchPlayersNeeded()) {
-                        switchPlayers();
+                    if (preventPlaying) {
+                        return;
+                    }
+                    try {
+                        Node node = tileClicked(finalRow, finalColumn);
+                        pane.getChildren().add(node);
+                        updateStatistics();
+                        if (isSwitchPlayersNeeded()) {
+                            delayedSwitchPlayers();
+                        }
+                    } catch (TileAlreadyBombedException e1) {
+                        return;
                     }
                 });
                 boardGrid.add(pane, column, row);
@@ -116,12 +129,14 @@ public class JavaFxGameEngine {
         }
     }
 
-    private Node tileClicked(int row, int column) {
-        HitBoardType hit = bombPoint(row -1 , column -1);
-
+    private Node tileClicked(int row, int column) throws TileAlreadyBombedException {
+        HitBoardType hit = bombPoint(row - 1, column - 1);
+        if (hit == null) {
+            return null;
+        }
         Group group = new Group();
         Node node = new Pane();
-        switch (hit){
+        switch (hit) {
             case HIT: {
                 node = getXDrawing();
                 break;
@@ -134,7 +149,6 @@ public class JavaFxGameEngine {
             }
         }
         group.getChildren().add(node);
-
         return group;
     }
 
@@ -149,8 +163,8 @@ public class JavaFxGameEngine {
 
     private Node getXDrawing() {
         Group xGroup = new Group();
-        Line line = new Line(5,5,tileSize-5, tileSize-5);
-        Line crossLine = new Line (5, tileSize-5 , tileSize-5 ,5);
+        Line line = new Line(5, 5, tileSize - 5, tileSize - 5);
+        Line crossLine = new Line(5, tileSize - 5, tileSize - 5, 5);
         line.setStroke(Color.RED);
         crossLine.setStroke(Color.RED);
         line.setStrokeWidth(5);
@@ -164,12 +178,10 @@ public class JavaFxGameEngine {
         return xGroup;
     }
 
-    private HitBoardType bombPoint(int row, int column) {
+    private HitBoardType bombPoint(int row, int column) throws TileAlreadyBombedException {
         HitBoardType hit = null;
         try {
             hit = gameInterface.bombPoint(row, column);
-        } catch (TileAlreadyBombedException e) {
-            return null;
         } catch (HittingTargetOutsideTheBoardException hittingTargetOutsideTheBoardException) {
             controller.setErrorText(hittingTargetOutsideTheBoardException.toString());
         }
@@ -178,6 +190,30 @@ public class JavaFxGameEngine {
 
     private boolean isSwitchPlayersNeeded() {
         return !(currentPlayer.getPlayerId().equals(gameInterface.getCurrentPlayerId()));
+    }
+
+    private void delayedSwitchPlayers() {
+        preventPlaying = true;
+        controller.setInfoText("Switching players !!!");
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                switchPlayers();
+                controller.clearInfoText();
+                preventPlaying = false;
+            }
+        });
+        new Thread(sleeper).start();
     }
 
     private void switchPlayers() {

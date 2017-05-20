@@ -89,7 +89,7 @@
       </HBox>
    </center>
    <bottom>
-      <Text fx:id="errorTextArea" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Text fx:id="bottomTextArea" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>

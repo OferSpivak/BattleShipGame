@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ public class RootController {
     @FXML
     public HBox rootMainArea;
     @FXML
-    public Text errorTextArea;
+    public Text bottomTextArea;
     public Button loadGameSettings;
     public TextField scoreField;
     public TextField missCount;
@@ -31,7 +32,21 @@ public class RootController {
     }
 
     public void setErrorText (String text){
-        errorTextArea.setText(text);
+        bottomTextArea.setFill(Color.RED);
+        bottomTextArea.setText(text);
+    }
+
+    public void setInfoText (String text){
+        bottomTextArea.setFill(Color.BLUEVIOLET);
+        bottomTextArea.setText(text);
+    }
+
+    public void clearInfoText(){
+        bottomTextArea.setText("");
+    }
+
+    public void clearErrorText(){
+        bottomTextArea.setText("");
     }
 
     public void setScore(String text) {
