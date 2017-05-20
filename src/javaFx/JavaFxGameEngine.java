@@ -131,9 +131,6 @@ public class JavaFxGameEngine {
 
     private Node tileClicked(int row, int column) throws TileAlreadyBombedException {
         HitBoardType hit = bombPoint(row - 1, column - 1);
-        if (hit == null) {
-            return null;
-        }
         Group group = new Group();
         Node node = new Pane();
         switch (hit) {
