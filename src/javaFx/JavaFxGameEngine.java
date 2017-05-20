@@ -5,10 +5,12 @@ import exceptions.HittingTargetOutsideTheBoardException;
 import exceptions.InitializationFailException;
 import exceptions.TileAlreadyBombedException;
 import gameInterface.GameInterface;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -17,6 +19,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 import java.io.File;
 import java.util.Objects;
@@ -48,7 +51,7 @@ public class JavaFxGameEngine {
 
     public void initializeGame() {
         Button loadGameSettingsBtn = (Button) scene.lookup("#loadGameSettings");
-        loadGameSettingsBtn.setOnAction(event -> {
+        loadGameSettingsBtn.setOnAction((ActionEvent event) -> {
             File file = OpenFileChooser();
             try {
                 gameInterface.initializeGame(file);
@@ -103,6 +106,7 @@ public class JavaFxGameEngine {
                 int finalColumn = column;
                 pane.setOnMouseClicked(e -> {
                     pane.getChildren().add(tileClicked(finalRow, finalColumn));
+                    updateStatistics();
                     if (isSwitchPlayersNeeded()) {
                         switchPlayers();
                     }
@@ -134,6 +138,15 @@ public class JavaFxGameEngine {
         return group;
     }
 
+    private void updateStatistics() {
+        int score = gameInterface.getCurrentPlayerScore();
+        int hitCount = gameInterface.getCurrentPlayerHitCount();
+        int missCount = gameInterface.getCurrentPlayerMissCount();
+        controller.setScore(Integer.toString(score));
+        controller.setHitCount(Integer.toString(hitCount));
+        controller.setMissCount(Integer.toString(missCount));
+    }
+
     private Node getXDrawing() {
         Group xGroup = new Group();
         Line line = new Line(5,5,tileSize-5, tileSize-5);
@@ -157,9 +170,8 @@ public class JavaFxGameEngine {
             hit = gameInterface.bombPoint(row, column);
         } catch (TileAlreadyBombedException e) {
             return null;
-        } catch (HittingTargetOutsideTheBoardException e) {
-            e.getMessage();
-            //todo - print error on screen
+        } catch (HittingTargetOutsideTheBoardException hittingTargetOutsideTheBoardException) {
+            controller.setErrorText(hittingTargetOutsideTheBoardException.toString());
         }
         return hit;
     }

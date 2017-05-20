@@ -41,11 +41,11 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Availible Minds" textAlignment="JUSTIFY" GridPane.rowIndex="3" />
                   <TextField alignment="CENTER" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hit Count" textAlignment="JUSTIFY" GridPane.rowIndex="1" />
-                  <TextField alignment="CENTER" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="hitCount" alignment="CENTER" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Score" textAlignment="JUSTIFY" />
-                  <TextField alignment="CENTER" disable="true" editable="false" promptText="1000" GridPane.columnIndex="1" />
+                  <TextField fx:id="scoreField" alignment="CENTER" disable="true" editable="false" GridPane.columnIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mis Count" textAlignment="JUSTIFY" GridPane.rowIndex="2" />
-                  <TextField alignment="CENTER" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="missCount" alignment="CENTER" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <Button fx:id="loadGameSettings" mnemonicParsing="false" text="Load game settings">
