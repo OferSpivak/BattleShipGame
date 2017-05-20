@@ -43,9 +43,6 @@ public class JavaFxGameEngine {
     private Player currentPlayer;
     private Player opponentPlayer;
 
-    private Player player1;
-    private Player player2;
-
     public JavaFxGameEngine(Stage stage, Scene scene, RootController controller) {
         gameInterface = new GameInterface();
         this.stage = stage;
@@ -63,8 +60,6 @@ public class JavaFxGameEngine {
                 controller.clearErrorText();
                 loadGameSettingsBtn.setDisable(true);
                 initializedPlayers();
-                currentPlayer = player1;
-                opponentPlayer = player2;
                 initializeRootMainArea(scene);
                 preventPlaying = false;
             } catch (InitializationFailException initializationFailException) {
@@ -81,6 +76,9 @@ public class JavaFxGameEngine {
     }
 
     private void initializedPlayers() {
+        Player player1;
+        Player player2;
+
         tileSize = boardSize < 10 ? 35 : boardSize < 15 ? 30 : boardSize < 18 ? 25 : 20;
         player1 = new Player(new java.util.Date().toString(), boardSize, tileSize);
         player2 = new Player(new java.util.Date().toString() + "2", boardSize, tileSize);
@@ -93,6 +91,9 @@ public class JavaFxGameEngine {
 
         setGridPaneClickable(player1.getHitBoardGrid());
         setGridPaneClickable(player2.getHitBoardGrid());
+
+        currentPlayer = player1;
+        opponentPlayer = player2;
     }
 
     private void initializeRootMainArea(Scene scene) {
@@ -153,6 +154,11 @@ public class JavaFxGameEngine {
         int score = gameInterface.getCurrentPlayerScore();
         int hitCount = gameInterface.getCurrentPlayerHitCount();
         int missCount = gameInterface.getCurrentPlayerMissCount();
+        if (gameInterface.getOpponentPlayerId().equals(currentPlayer.getPlayerId())){ //due to game engine switching immediately  between the players and the UI is delayed.
+            score = gameInterface.getOpponentPlayerScore();
+            hitCount = gameInterface.getOpponentPlayerHitCount();
+            missCount = gameInterface.getOpponentPlayerMissCount();
+        }
         controller.setScore(Integer.toString(score));
         controller.setHitCount(Integer.toString(hitCount));
         controller.setMissCount(Integer.toString(missCount));
@@ -214,11 +220,11 @@ public class JavaFxGameEngine {
     }
 
     private void switchPlayers() {
-        rootMainArea.getChildren().removeAll(currentPlayer.getHitBoardGrid(), currentPlayer.getOwnBoardGrid());
-        rootMainArea.getChildren().addAll(opponentPlayer.getHitBoardGrid(), opponentPlayer.getOwnBoardGrid());
-        // switching
         Player temp = currentPlayer;
         currentPlayer = opponentPlayer;
         opponentPlayer = temp;
+        rootMainArea.getChildren().removeAll(opponentPlayer.getHitBoardGrid(), opponentPlayer.getOwnBoardGrid());
+        rootMainArea.getChildren().addAll(currentPlayer.getHitBoardGrid(), currentPlayer.getOwnBoardGrid());
+        updateStatistics();
     }
 }
