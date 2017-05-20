@@ -64,8 +64,8 @@ public class Player {
             boardGrid.getRowConstraints().add(row);
         }
 
-        Line line = new Line(0,0,tileSize, tileSize);
-        boardGrid.add(line, 0,0);
+        Line line = new Line(0, 0, tileSize, tileSize);
+        boardGrid.add(line, 0, 0);
 
         for (int i = 1; i <= boardSize; i++) {
             //column numbering
@@ -92,10 +92,11 @@ public class Player {
     private void setOwnBoard(Tile[][] playerOwnBoard) {
         for (int row = 1; row < boardSize + 1; row++) {
             for (int column = 1; column < boardSize + 1; column++) {
-                Tile tile = playerOwnBoard[row-1][column-1];
+                Tile tile = playerOwnBoard[row - 1][column - 1];
                 if (tile.getState() == TileState.FULL) {
                     Pane pane = new Pane();
-                    Rectangle rectangle = new Rectangle(tileSize * 0.9, tileSize * 0.9, Color.BLUE);
+                    Rectangle rectangle = new Rectangle(tileSize * 0.05, tileSize * 0.05, tileSize * 0.9, tileSize * 0.9);
+                    rectangle.setFill(Color.BLUE);
                     pane.getChildren().add(rectangle);
                     ownBoardGrid.add(pane, column, row);
                 }
