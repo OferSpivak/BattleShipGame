@@ -22,17 +22,6 @@ public class RootController {
     public Text errorTextArea;
     public Button loadGameSettings;
 
-    private Stage stage;
-    private GameInterface gameInterface;
-
-    public void setStage (Stage stage){
-        this.stage = stage;
-    }
-
-    public void setGameInterface(GameInterface gameInterface) {
-        this.gameInterface = gameInterface;
-    }
-
     public void setErrorText (String text){
         errorTextArea.setText(text);
     }

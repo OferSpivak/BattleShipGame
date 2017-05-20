@@ -106,4 +106,22 @@ public class BaseGameEngine implements EngineUIInterface {
     public boolean isCurrentPlayerWon() {
         return getCurrentPlayerHitCount() == scoreToWin;
     }
+
+    public void setCurrentPlayerId(String id) {
+        currentPlayer.setPlayerId(id);
+    }
+
+    public void setOpponentPlayerId(String id) {
+        opponentPlayer.setPlayerId(id);
+    }
+
+    @Override
+    public String getCurrentPlayerId() {
+        return currentPlayer.getPlayerId();
+    }
+
+    @Override
+    public String getOpponentPlayerId() {
+        return opponentPlayer.getPlayerId();
+    }
 }

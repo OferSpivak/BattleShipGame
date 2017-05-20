@@ -21,6 +21,7 @@ public class PlayerImpl implements Player {
     private int score = 0;
     private int missCount = 0;
     private int hitCount = 0;
+    private String PlayerId;
 
     private void initBoards(int boardsSize) {
         hitBoard = new HitBoardType[boardsSize][boardsSize];
@@ -190,5 +191,13 @@ public class PlayerImpl implements Player {
     public int getShipScore(int x, int y) {
         Tile tile = ownBoard[x][y];
         return tile.getBattleShip().getScore();
+    }
+
+    public void setPlayerId(String id) {
+        PlayerId = id;
+    }
+
+    public String getPlayerId() {
+        return PlayerId;
     }
 }

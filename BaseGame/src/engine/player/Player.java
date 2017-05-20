@@ -36,4 +36,8 @@ public interface Player {
     Tile[][] getOwnBoard();
 
     int getShipScore(int x, int y);
+
+    void setPlayerId(String id);
+
+    String getPlayerId();
 }

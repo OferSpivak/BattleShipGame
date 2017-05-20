@@ -16,6 +16,10 @@ public interface EngineUIInterface {
 
      HitBoardType[][] getCurrentPlayerHitBoard();
 
+     public Tile[][] getOpponentPlayerOwnBoard();
+
+     public HitBoardType[][] getOpponentPlayerHitBoard();
+
      String getCurrentPlayerName();
 
      String getOpponentPlayerName();
@@ -33,5 +37,13 @@ public interface EngineUIInterface {
      int getOpponentPlayerMissCount();
 
      boolean isCurrentPlayerWon();
+
+     void setCurrentPlayerId(String id);
+
+     void setOpponentPlayerId(String id);
+
+     String getCurrentPlayerId();
+
+     String getOpponentPlayerId();
 
 }
