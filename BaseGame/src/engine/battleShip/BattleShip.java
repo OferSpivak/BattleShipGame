@@ -1,6 +1,7 @@
 package engine.battleShip;
 
 import engine.enums.Direction;
+import engine.enums.ShipTypeStyle;
 
 /**
  * Created by OFer.Spivak on 12/04/2017.
@@ -19,6 +20,8 @@ public interface BattleShip {
     int getPositionY();
 
     Direction getDirection();
+
+    ShipTypeStyle getShipType();
 
     int getScore();
 }

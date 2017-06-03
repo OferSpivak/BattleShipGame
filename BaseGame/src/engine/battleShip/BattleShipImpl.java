@@ -1,6 +1,7 @@
 package engine.battleShip;
 
 import engine.enums.Direction;
+import engine.enums.ShipTypeStyle;
 
 /**
  * Created by OFer.Spivak on 12/04/2017.
@@ -12,11 +13,13 @@ public class BattleShipImpl implements BattleShip{
     private int positionY;
     private int score;
     private Direction direction;
+    private ShipTypeStyle shipType;
     //int score; //todo - to figure out if i gonna used it at the next HW
 
-    public BattleShipImpl(int size, Direction direction, int positionX, int positionY, int score) {
+    public BattleShipImpl(int size, Direction direction, ShipTypeStyle shipTypeStyle, int positionX, int positionY, int score) {
         originalSize = currentSize = size;
         this.direction = direction;
+        this.shipType = shipTypeStyle;
         this.positionX = positionX;
         this.positionY = positionY;
         this.score = score;
@@ -48,6 +51,10 @@ public class BattleShipImpl implements BattleShip{
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public ShipTypeStyle getShipType() {
+        return shipType;
     }
 
     public int getScore() {

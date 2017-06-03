@@ -3,6 +3,7 @@ package engine.player;
 import engine.battleShip.BattleShip;
 import engine.enums.Direction;
 import engine.enums.HitBoardType;
+import engine.enums.ShipTypeStyle;
 import engine.enums.TileState;
 import exceptions.*;
 
@@ -82,6 +83,7 @@ public class PlayerImpl implements Player {
         int positionX = ship.getPositionX();
         int positionY = ship.getPositionY();
         Direction direction = ship.getDirection();
+        ShipTypeStyle shipType = ship.getShipType();
 
         try {
             if (direction == Direction.ROW) {
