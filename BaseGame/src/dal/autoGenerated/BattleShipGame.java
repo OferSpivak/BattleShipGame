@@ -51,26 +51,12 @@ import javax.xml.bind.annotation.XmlType;
  *                               &lt;simpleType>
  *                                 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *                                   &lt;enumeration value="Regular"/>
- *                                   &lt;enumeration value="Complex"/>
+ *                                   &lt;enumeration value="L-Shape"/>
  *                                 &lt;/restriction>
  *                               &lt;/simpleType>
  *                             &lt;/element>
  *                             &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *                             &lt;choice>
- *                               &lt;element name="length" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *                               &lt;element name="path">
- *                                 &lt;complexType>
- *                                   &lt;complexContent>
- *                                     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                                       &lt;sequence>
- *                                         &lt;element name="firstAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *                                         &lt;element name="secondAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *                                       &lt;/sequence>
- *                                     &lt;/restriction>
- *                                   &lt;/complexContent>
- *                                 &lt;/complexType>
- *                               &lt;/element>
- *                             &lt;/choice>
+ *                             &lt;element name="length" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *                             &lt;element name="score" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *                           &lt;/sequence>
  *                           &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -114,6 +100,10 @@ import javax.xml.bind.annotation.XmlType;
  *                                           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
  *                                             &lt;enumeration value="ROW"/>
  *                                             &lt;enumeration value="COLUMN"/>
+ *                                             &lt;enumeration value="RIGHT-DOWN"/>
+ *                                             &lt;enumeration value="RIGHT-UP"/>
+ *                                             &lt;enumeration value="UP-RIGHT"/>
+ *                                             &lt;enumeration value="DOWN-RIGHT"/>
  *                                           &lt;/restriction>
  *                                         &lt;/simpleType>
  *                                       &lt;/element>
@@ -283,6 +273,10 @@ public class BattleShipGame {
      *                                 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
      *                                   &lt;enumeration value="ROW"/>
      *                                   &lt;enumeration value="COLUMN"/>
+     *                                   &lt;enumeration value="RIGHT-DOWN"/>
+     *                                   &lt;enumeration value="RIGHT-UP"/>
+     *                                   &lt;enumeration value="UP-RIGHT"/>
+     *                                   &lt;enumeration value="DOWN-RIGHT"/>
      *                                 &lt;/restriction>
      *                               &lt;/simpleType>
      *                             &lt;/element>
@@ -374,6 +368,10 @@ public class BattleShipGame {
          *                       &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
          *                         &lt;enumeration value="ROW"/>
          *                         &lt;enumeration value="COLUMN"/>
+         *                         &lt;enumeration value="RIGHT-DOWN"/>
+         *                         &lt;enumeration value="RIGHT-UP"/>
+         *                         &lt;enumeration value="UP-RIGHT"/>
+         *                         &lt;enumeration value="DOWN-RIGHT"/>
          *                       &lt;/restriction>
          *                     &lt;/simpleType>
          *                   &lt;/element>
@@ -455,6 +453,10 @@ public class BattleShipGame {
              *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
              *               &lt;enumeration value="ROW"/>
              *               &lt;enumeration value="COLUMN"/>
+             *               &lt;enumeration value="RIGHT-DOWN"/>
+             *               &lt;enumeration value="RIGHT-UP"/>
+             *               &lt;enumeration value="UP-RIGHT"/>
+             *               &lt;enumeration value="DOWN-RIGHT"/>
              *             &lt;/restriction>
              *           &lt;/simpleType>
              *         &lt;/element>
@@ -657,26 +659,12 @@ public class BattleShipGame {
      *                     &lt;simpleType>
      *                       &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
      *                         &lt;enumeration value="Regular"/>
-     *                         &lt;enumeration value="Complex"/>
+     *                         &lt;enumeration value="L-Shape"/>
      *                       &lt;/restriction>
      *                     &lt;/simpleType>
      *                   &lt;/element>
      *                   &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}int"/>
-     *                   &lt;choice>
-     *                     &lt;element name="length" type="{http://www.w3.org/2001/XMLSchema}int"/>
-     *                     &lt;element name="path">
-     *                       &lt;complexType>
-     *                         &lt;complexContent>
-     *                           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *                             &lt;sequence>
-     *                               &lt;element name="firstAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
-     *                               &lt;element name="secondAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
-     *                             &lt;/sequence>
-     *                           &lt;/restriction>
-     *                         &lt;/complexContent>
-     *                       &lt;/complexType>
-     *                     &lt;/element>
-     *                   &lt;/choice>
+     *                   &lt;element name="length" type="{http://www.w3.org/2001/XMLSchema}int"/>
      *                   &lt;element name="score" type="{http://www.w3.org/2001/XMLSchema}int"/>
      *                 &lt;/sequence>
      *                 &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -745,26 +733,12 @@ public class BattleShipGame {
          *           &lt;simpleType>
          *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
          *               &lt;enumeration value="Regular"/>
-         *               &lt;enumeration value="Complex"/>
+         *               &lt;enumeration value="L-Shape"/>
          *             &lt;/restriction>
          *           &lt;/simpleType>
          *         &lt;/element>
          *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}int"/>
-         *         &lt;choice>
-         *           &lt;element name="length" type="{http://www.w3.org/2001/XMLSchema}int"/>
-         *           &lt;element name="path">
-         *             &lt;complexType>
-         *               &lt;complexContent>
-         *                 &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-         *                   &lt;sequence>
-         *                     &lt;element name="firstAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
-         *                     &lt;element name="secondAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
-         *                   &lt;/sequence>
-         *                 &lt;/restriction>
-         *               &lt;/complexContent>
-         *             &lt;/complexType>
-         *           &lt;/element>
-         *         &lt;/choice>
+         *         &lt;element name="length" type="{http://www.w3.org/2001/XMLSchema}int"/>
          *         &lt;element name="score" type="{http://www.w3.org/2001/XMLSchema}int"/>
          *       &lt;/sequence>
          *       &lt;attribute name="name" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -780,7 +754,6 @@ public class BattleShipGame {
             "type",
             "amount",
             "length",
-            "path",
             "score"
         })
         public static class ShipType {
@@ -788,8 +761,7 @@ public class BattleShipGame {
             @XmlElement(required = true)
             protected String type;
             protected int amount;
-            protected Integer length;
-            protected BattleShipGame.ShipTypes.ShipType.Path path;
+            protected int length;
             protected int score;
             @XmlAttribute(name = "name", required = true)
             protected String name;
@@ -837,49 +809,17 @@ public class BattleShipGame {
             /**
              * Gets the value of the length property.
              * 
-             * @return
-             *     possible object is
-             *     {@link Integer }
-             *     
              */
-            public Integer getLength() {
+            public int getLength() {
                 return length;
             }
 
             /**
              * Sets the value of the length property.
              * 
-             * @param value
-             *     allowed object is
-             *     {@link Integer }
-             *     
              */
-            public void setLength(Integer value) {
+            public void setLength(int value) {
                 this.length = value;
-            }
-
-            /**
-             * Gets the value of the path property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link BattleShipGame.ShipTypes.ShipType.Path }
-             *     
-             */
-            public BattleShipGame.ShipTypes.ShipType.Path getPath() {
-                return path;
-            }
-
-            /**
-             * Sets the value of the path property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link BattleShipGame.ShipTypes.ShipType.Path }
-             *     
-             */
-            public void setPath(BattleShipGame.ShipTypes.ShipType.Path value) {
-                this.path = value;
             }
 
             /**
@@ -920,71 +860,6 @@ public class BattleShipGame {
              */
             public void setName(String value) {
                 this.name = value;
-            }
-
-
-            /**
-             * <p>Java class for anonymous complex type.
-             * 
-             * <p>The following schema fragment specifies the expected content contained within this class.
-             * 
-             * <pre>
-             * &lt;complexType>
-             *   &lt;complexContent>
-             *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-             *       &lt;sequence>
-             *         &lt;element name="firstAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
-             *         &lt;element name="secondAxisLength" type="{http://www.w3.org/2001/XMLSchema}int"/>
-             *       &lt;/sequence>
-             *     &lt;/restriction>
-             *   &lt;/complexContent>
-             * &lt;/complexType>
-             * </pre>
-             * 
-             * 
-             */
-            @XmlAccessorType(XmlAccessType.FIELD)
-            @XmlType(name = "", propOrder = {
-                "firstAxisLength",
-                "secondAxisLength"
-            })
-            public static class Path {
-
-                protected int firstAxisLength;
-                protected int secondAxisLength;
-
-                /**
-                 * Gets the value of the firstAxisLength property.
-                 * 
-                 */
-                public int getFirstAxisLength() {
-                    return firstAxisLength;
-                }
-
-                /**
-                 * Sets the value of the firstAxisLength property.
-                 * 
-                 */
-                public void setFirstAxisLength(int value) {
-                    this.firstAxisLength = value;
-                }
-
-                /**
-                 * Gets the value of the secondAxisLength property.
-                 * 
-                 */
-                public int getSecondAxisLength() {
-                    return secondAxisLength;
-                }
-
-                /**
-                 * Sets the value of the secondAxisLength property.
-                 * 
-                 */
-                public void setSecondAxisLength(int value) {
-                    this.secondAxisLength = value;
-                }
-
             }
 
         }
