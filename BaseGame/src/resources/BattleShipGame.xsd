@@ -22,7 +22,7 @@
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
                                                     <xs:enumeration value="Regular"/>
-                                                    <xs:enumeration value="L-Shape"/>
+                                                    <xs:enumeration value="L_Shape"/>
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>
@@ -57,10 +57,10 @@
                                                             <xs:restriction base="xs:string">
                                                                 <xs:enumeration value="ROW"/>
                                                                 <xs:enumeration value="COLUMN"/>
-                                                                <xs:enumeration value="RIGHT-DOWN"/>
-                                                                <xs:enumeration value="RIGHT-UP"/>
-                                                                <xs:enumeration value="UP-RIGHT"/>
-                                                                <xs:enumeration value="DOWN-RIGHT"/>
+                                                                <xs:enumeration value="RIGHT_DOWN"/>
+                                                                <xs:enumeration value="RIGHT_UP"/>
+                                                                <xs:enumeration value="UP_RIGHT"/>
+                                                                <xs:enumeration value="DOWN_RIGHT"/>
                                                             </xs:restriction>
                                                         </xs:simpleType>
                                                     </xs:element>

@@ -6,5 +6,8 @@ package engine.enums;
 public enum Direction {
     ROW,
     COLUMN,
-    COMPLEX
+    RIGHT_DOWN,
+    RIGHT_UP,
+    UP_RIGHT,
+    DOWN_RIGHT
 }
