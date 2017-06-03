@@ -63,6 +63,7 @@ public class SettingsImpl implements Settings {
             BattleShip battleShip = new BattleShipImpl(
                     shipType.getShipSize(),
                     ship.getDirection(),
+                    ship.getShipType().getType(),
                     convertPositionToArrayIndex(ship.getPositionX()),
                     convertPositionToArrayIndex(ship.getPositionY()),
                     shipType.getScore()
