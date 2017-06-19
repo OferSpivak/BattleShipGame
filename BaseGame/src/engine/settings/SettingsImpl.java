@@ -5,7 +5,6 @@ import dal.Ship;
 import dal.ShipType;
 import engine.battleShip.BattleShip;
 import engine.battleShip.BattleShipImpl;
-import engine.enums.Direction;
 import exceptions.AddingShipsAboveAllowedAmountException;
 import exceptions.InitializationFailException;
 import exceptions.NotAllShipTypeAddedToBoardException;
@@ -36,10 +35,10 @@ public class SettingsImpl implements Settings {
 
     private void setShipTypes(List<ShipType> shipTypeList) throws ShipTypeAlreadyDeclaredException {
         for (ShipType shipType : shipTypeList) {
-            if (stringShipTypeMap.containsKey(shipType.getShipTypeName())) {
+            if (stringShipTypeMap.containsKey(shipType.getShipTypeId())) {
                 throw new ShipTypeAlreadyDeclaredException(shipType);
             }
-            stringShipTypeMap.put(shipType.getShipTypeName(), shipType);
+            stringShipTypeMap.put(shipType.getShipTypeId(), shipType);
             totalShipsTilesAmount += shipType.getShipSize() * shipType.getShipAmountOnBoard();
             totalShipsScore += shipType.getScore();
         }
@@ -55,11 +54,11 @@ public class SettingsImpl implements Settings {
 
         for (Ship ship : playerShipList) {
             ShipType shipType = ship.getShipType();
-            int currentCount = shipTypeCount.get(shipType.getShipTypeName());
+            int currentCount = shipTypeCount.get(shipType.getShipTypeId());
             if (currentCount == 0) {
                throw new AddingShipsAboveAllowedAmountException(ship);
             }
-            shipTypeCount.replace(shipType.getShipTypeName(), currentCount - 1);
+            shipTypeCount.replace(shipType.getShipTypeId(), currentCount - 1);
             BattleShip battleShip = new BattleShipImpl(
                     shipType.getShipSize(),
                     ship.getDirection(),

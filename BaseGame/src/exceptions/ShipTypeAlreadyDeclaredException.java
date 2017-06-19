@@ -7,6 +7,6 @@ import dal.ShipType;
  */
 public class ShipTypeAlreadyDeclaredException extends InitializationFailException {
     public ShipTypeAlreadyDeclaredException(ShipType shipType) {
-        super("Ship-type: " + shipType.getShipTypeName() + " declared more than one");
+        super("Ship-type: " + shipType.getShipTypeId() + " declared more than one");
     }
 }

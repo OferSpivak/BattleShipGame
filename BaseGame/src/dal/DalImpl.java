@@ -36,12 +36,12 @@ public class DalImpl {
         }
     }
 
-    private ShipType getShipTypeFromList(String shipTypeName){
+    private ShipType getShipTypeFromList(String shipTypeId){
         if (shipTypeList == null) {
             shipTypeList = getShipTypeList();
         }
         for (ShipType item: shipTypeList){
-            if (item.getShipTypeName().equals(shipTypeName)){
+            if (item.getShipTypeId().equals(shipTypeId)){
                 return item;
             }
         }
@@ -65,7 +65,7 @@ public class DalImpl {
                 @Override
                 public ShipTypeStyle getType() {
                     try {
-                        return ShipTypeStyle.valueOf(xmlShipType.getType());
+                        return ShipTypeStyle.valueOf(xmlShipType.getCategory());
                     } catch (IllegalArgumentException e) {
                         // todo - add initialization exception
                         throw e;
@@ -73,8 +73,8 @@ public class DalImpl {
                 }
 
                 @Override
-                public String getShipTypeName() {
-                    return xmlShipType.getName();
+                public String getShipTypeId() {
+                    return xmlShipType.getId();
                 }
 
                 @Override
@@ -114,7 +114,7 @@ public class DalImpl {
 
                 @Override
                 public ShipType getShipType() {
-                    return getShipTypeFromList(xmlShip.getType());
+                    return getShipTypeFromList(xmlShip.getShipTypeId());
                 }
 
                 @Override
