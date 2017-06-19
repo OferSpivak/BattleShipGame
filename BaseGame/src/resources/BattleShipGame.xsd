@@ -55,8 +55,8 @@
                                                     <xs:element name="type" type="xs:string"/>
                                                     <xs:element name="position">
                                                         <xs:complexType>
-                                                            <xs:attribute name="x" type="xs:int"/>
-                                                            <xs:attribute name="y" type="xs:int"/>
+                                                            <xs:attribute name="x" type="xs:int" use="required" />
+                                                            <xs:attribute name="y" type="xs:int" use="required" />
                                                         </xs:complexType>
                                                     </xs:element>
                                                     <xs:element name="direction">
