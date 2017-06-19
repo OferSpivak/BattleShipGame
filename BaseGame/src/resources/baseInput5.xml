@@ -3,50 +3,53 @@
     <GameType>BASIC</GameType>
     <boardSize>5</boardSize>
     <shipTypes>
-        <shipType name="A">
-            <type>REGULAR</type>
+        <shipType id="A">
+            <category>REGULAR</category>
             <amount>1</amount>
             <length>4</length>
             <score>1</score>
         </shipType>
-        <shipType name="B">
-            <type>REGULAR</type>
+        <shipType id="B">
+            <category>REGULAR</category>
             <amount>2</amount>
             <length>3</length>
             <score>1</score>
         </shipType>
     </shipTypes>
+   <!-- <mine>
+        <amount>3</amount>
+    </mine>-->
     <boards>
         <board>
             <ship>
-                <type>A</type>
+                <shipTypeId>A</shipTypeId>
                 <position x="1" y="1" />
                 <direction>ROW</direction>
             </ship>
             <ship>
-                <type>B</type>
+                <shipTypeId>B</shipTypeId>
                 <position x="3" y="1" />
                 <direction>COLUMN</direction>
             </ship>
             <ship>
-                <type>B</type>
+                <shipTypeId>B</shipTypeId>
                 <position x="5" y="3" />
                 <direction>ROW</direction>
             </ship>
         </board>
         <board>
             <ship>
-                <type>A</type>
+                <shipTypeId>A</shipTypeId>
                 <position x="1" y="1" />
                 <direction>ROW</direction>
             </ship>
             <ship>
-                <type>B</type>
+                <shipTypeId>B</shipTypeId>
                 <position x="3" y="1" />
                 <direction>COLUMN</direction>
             </ship>
             <ship>
-                <type>B</type>
+                <shipTypeId>B</shipTypeId>
                 <position x="5" y="3" />
                 <direction>ROW</direction>
             </ship>

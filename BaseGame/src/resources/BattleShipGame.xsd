@@ -18,7 +18,7 @@
                             <xs:element name="shipType" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="type">
+                                        <xs:element name="category">
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
                                                     <xs:enumeration value="REGULAR"/>
@@ -30,7 +30,7 @@
                                         <xs:element name="length" type="xs:int"/>
                                         <xs:element name="score" type="xs:int"/>
                                     </xs:sequence>
-                                    <xs:attribute name="name" type="xs:string" use="required"/>
+                                    <xs:attribute name="id" type="xs:string" use="required"/>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
@@ -52,7 +52,7 @@
                                         <xs:element name="ship" maxOccurs="unbounded">
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="type" type="xs:string"/>
+                                                    <xs:element name="shipTypeId" type="xs:string"/>
                                                     <xs:element name="position">
                                                         <xs:complexType>
                                                             <xs:attribute name="x" type="xs:int" use="required" />

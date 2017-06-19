@@ -3,32 +3,32 @@
     <GameType>BASIC</GameType>
     <boardSize>12</boardSize>
     <shipTypes>
-        <shipType name="A">
-            <type>REGULAR</type>
+        <shipType id="A">
+            <category>REGULAR</category>
             <amount>1</amount>
             <length>4</length>
             <score>1</score>
         </shipType>
-        <shipType name="B">
-            <type>REGULAR</type>
+        <shipType id="B">
+            <category>REGULAR</category>
             <amount>2</amount>
             <length>3</length>
             <score>1</score>
         </shipType>
-        <shipType name="C">
-            <type>REGULAR</type>
+        <shipType id="C">
+            <category>REGULAR</category>
             <amount>3</amount>
             <length>2</length>
             <score>1</score>
         </shipType>
-        <shipType name="D">
-            <type>REGULAR</type>
+        <shipType id="D">
+            <category>REGULAR</category>
             <amount>4</amount>
             <length>1</length>
             <score>1</score>
         </shipType>
-        <!--<shipType name="E">
-            <type>Complex</type>
+        <!--<shipType id="E">
+            <category>Complex</category>
             <amount>4</amount>
             <path>
                 <firstAxisLength>2</firstAxisLength>
@@ -39,24 +39,24 @@
     <boards>
         <board>
             <ship>
-                <type>A</type>
+                <shipTypeId>A</shipTypeId>
                 <position x="1" y="1" />
                 <direction>ROW</direction>
             </ship>
             <ship>
-                <type>B</type>
+                <shipTypeId>B</shipTypeId>
                 <position x="2" y="2" />
                 <direction>COLUMN</direction>
             </ship>
         </board>
         <board>
             <ship>
-                <type>A</type>
+                <shipTypeId>A</shipTypeId>
                 <position x="1" y="1" />
                 <direction>COLUMN</direction>
             </ship>
             <ship>
-                <type>B</type>
+                <shipTypeId>B</shipTypeId>
                 <position x="2" y="2" />
                 <direction>ROW</direction>
             </ship>
